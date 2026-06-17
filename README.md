@@ -1,189 +1,101 @@
-# templates/ci/backend/java.yml
-# CI orchestrator for Java/Gradle MICROSERVICE repos (produce container image → OCP)
-# For library/utility repos (produce JARs → JFrog), use java.library.yml
-#
-# App repo .gitlab-ci.yml:
-#   include:
-#     - project: 'itepaypg-sbiepay2/infra/devops/cicd-templates'
-#       ref: main
-#       file: 'templates/ci/backend/java.yml'
-#   variables:
-#     RELEASE_NAME: txn
-#     CHART_NAME:   transactionservice
-
-default:
-  tags:
-    - common_runner
-
-include:
-  - local: 'ci/version/semver.yml'
-  - local: 'ci/build/java.gradle.yml'
-  - local: 'ci/test/java.unit.yml'
-  # - local: 'ci/security/sast/sast.gitlab.yml'
-  # - local: 'ci/security/sast/sast.fortify.yml'
-  # - local: 'ci/security/sca/sca.xray.yml'
-  # - local: 'ci/security/secrets/secrets.detect.yml'
-  # - local: 'ci/security/iac/iac.scan.yml'
-  # - local: 'ci/security/license/license.scan.yml'
-  # - local: 'ci/security/sbom/sbom.generate.yml'
-  - local: 'ci/image/image.build.yml'
-  # - local: 'ci/image/image.scan.trivy.yml'
-  # - local: 'ci/image/image.scan.xray.yml'
-  # - local: 'ci/image/image.scan.rhacs.yml'
-  # - local: 'ci/image/image.sign.yml'
-  # - local: 'ci/image/image.sbom.attest.yml'
-  - local: 'ci/image/image.push.yml'
-  # - local: 'ci/release/tag.yml'
-  # # - local: 'ci/release/back-merge.yml'
-  - local: 'ci/deploy/trigger.cd.yml'
-  - local: 'ci/deploy/deploy.jobs.yml'
-
-stages:
-  - version       # version generation
-  - build         # gradle compile
-  - test          # unit + integration
-  - sast          # gitlab sast + fortify
-  - security      # sca + secrets + iac + license + sbom
-  - image-build   # podman build (local only — no push)
-  - image-scan    # trivy + xray + rhacs (gate before sign)
-  # - image-attest  # cosign sign + sbom attestation
-  - image-push    # push to JFrog (only after scan + sign)
-  - release       # rc-tag (release/*) or prod-tag (main) — auto on merge
-  - deploy        # trigger buttons → deployment repo CD pipeline
-
-variables:
-  CI_TEMPLATE_REGISTRY_HOST:           "artifactory.jfrog.sbi:443"
-  CI_TEMPLATE_REGISTRY_HOST_PREPROD:   "epaynonprod-registry-quay-quay-enterprise.apps.preprod.epay.sbi"
-  CI_TEMPLATE_REGISTRY_HOST_PREPRODDC: "dc-preprod-registry-quay-quay-enterprise.apps.dcpreprod.epay.sbi"
-  CI_TEMPLATE_REGISTRY_HOST_PRODDR:    "epayproddr-registry-quay-quay-enterprise.apps.dr.prod.epay.sbi"
-  CI_TEMPLATE_REGISTRY_HOST_PRODDC:    "proddc-registry-route-quay-enterprise.apps.dc.prod.epay.sbi"
-  GIT_STRATEGY: clone
-  RELEASE_NAME: ""
-  CHART_NAME:   ""
-  IMAGE_NAME:   "itepaypg-sbiepay2-docker-local/app/backend/${CI_PROJECT_NAME}"
-  BASE_IMAGE_DEV_ENV:    "artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/redhat-baseimage/openjdk-21-runtime:1.23-6.1758133907"
-  BASE_IMAGE_HIGHER_ENV: "artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/ubi9/openjdk-21-runtime:1.24-2.1776357031"
-
-# Branch + MR filter — applied to all jobs via extends
-.rules:
-  rules:
-    # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" &&
-            (
-              $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/
-              ||
-              $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^feature(\/.*)*$/
-            )'
-    - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-    - when: never
-
-# ── Stage: version ─────────────────────────────────────────────────────────────
-# Defined in ci/version/semver.yml — no override needed, runs on all pipelines
-
-# ── Stage: build ───────────────────────────────────────────────────────────────
-build:
-  extends: [.build, .rules]
-
-# ── Stage: test ────────────────────────────────────────────────────────────────
-test:
-  extends: [.test, .rules]
-
-# ── Stage: sast ────────────────────────────────────────────────────────────────
-# sast:gitlab:
-#   extends: [.sast, .rules]
-
-# sast:fortify:
-#   extends: [.sast_fortify, .rules]
-
-# # ── Stage: security ────────────────────────────────────────────────────────────
-# sca:xray:
-#   extends: [.sca, .rules]
-
-# # GitLab template jobs — override stage and apply rules
-# secret_detection:
-#   stage: security
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-#     - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-#     - when: never
-
-# kics-iac-sast:
-#   stage: security
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-#     - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-#     - when: never
-
-# license_scanning:
-#   stage: security
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-#     - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-#     - when: never
-
-# dependency_scanning:
-#   stage: security
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-#     - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-#     - when: never
-
-# # ── Stage: image-build ─────────────────────────────────────────────────────────
-image:build:
-  extends: [.image_build, .rules]
-
-# # ── Stage: image-scan ──────────────────────────────────────────────────────────
-# Trivy (GitLab template job) — override stage and rules
-# container_scanning:
-#   stage: image-scan
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|develop|release)(\/.*)*$/'
-#     - if: '$CI_COMMIT_BRANCH =~ /^(main|develop|release|hotfix|bugfix|feature)(\/.*)*$/'
-#     - when: never
-# image:scan:xray:
-#   extends: [.image_scan_xray, .rules]
-
-# image:scan:rhacs:
-#   extends: [.image_scan_rhacs, .rules]
-
-# # ── Stage: image-attest ────────────────────────────────────────────────────────
-# image:sign:
-#   extends: [.image_sign, .rules]
-
-# image:sbom:attest:
-#   extends: [.sbom_attest, .rules]
-
-# # ── Stage: image-push ──────────────────────────────────────────────────────────
-# image:push:
-#   extends: [.image_push, .rules]
-
-  
-
-# ── Stage: release ────────────────────────────────────────────────────────────
-# create-rc-tag: auto on release/* post-merge  (defined in ci/release/tag.yml)
-# create-prod-tag: auto on main merge          (defined in ci/release/tag.yml)
-
-# ── Stage: deploy ─────────────────────────────────────────────────────────────
-# All deploy trigger jobs defined in ci/deploy/deploy.jobs.yml
-# deploy-dev: auto | deploy-sit/uat/int/perf/preprod: manual (RM)
-# deploy-prod-dc/dr: manual — Bank Only
-
-
-
-
-.gitlab-ci.yml
-Ghanshyam  Baboo's avatar
-EAP-00|OG| edit dockerfile
-Ghanshyam Baboo authored 5 days ago
-360f0f7d
- Code owners
-Assign users and groups as approvers for specific file changes. Learn more.
-.gitlab-ci.yml
-195 B
-include:
-  - project: 'itepaypg-sbiepay2/infra/devops/cicd-templates'
-    ref: main
-    file: 'templates/ci/backend/java.yml'
-variables:
-  RELEASE_NAME: report
-  CHART_NAME: reportservice
+Running with gitlab-runner 17.9.2 (14c5775c)
+  on dc_runner_79 6v7R1SqDv, system ID: s_37748334dac5
+Resolving secrets
+Preparing the "docker" executor
+00:01
+Using Docker executor with image artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using locally found image version due to "if-not-present" pull policy
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Using locally found image version due to "if-not-present" pull policy
+Using docker image sha256:388b5e85519adde960bf31a199d19fcb2fb7abf2ebb10c26328d14802765695b for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle@sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de ...
+Preparing environment
+00:01
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Running on runner-6v7r1sqdv-project-2757-concurrent-0 via PE3DSOPGRUNNERS5...
+Getting source from Git repository
+00:05
+Fetching changes with git depth set to 20...
+Initialized empty Git repository in /builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/.git/
+Created fresh repository.
+Checking out 82c3c494 as detached HEAD (ref is refs/merge-requests/73/head)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script
+01:36
+Using docker image sha256:388b5e85519adde960bf31a199d19fcb2fb7abf2ebb10c26328d14802765695b for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle@sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de ...
+$ java -version
+openjdk version "21.0.11" 2026-04-21 LTS
+OpenJDK Runtime Environment (Red_Hat-21.0.11.0.10-1) (build 21.0.11+10-LTS)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.11.0.10-1) (build 21.0.11+10-LTS, mixed mode, sharing)
+$ gradle --version
+Welcome to Gradle 9.4.1!
+Here are the highlights of this release:
+ - Java 26 support
+ - Non-class-based JVM tests
+ - Enhanced console progress bar
+For more details see https://docs.gradle.org/9.4.1/release-notes.html
+------------------------------------------------------------
+Gradle 9.4.1
+------------------------------------------------------------
+Build time:    2026-03-19 08:46:28 UTC
+Revision:      2d6327017519d23b96af35865dc997fcb544fb40
+Kotlin:        2.3.0
+Groovy:        4.0.29
+Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
+Launcher JVM:  21.0.11 (Red Hat, Inc. 21.0.11+10-LTS)
+Daemon JVM:    /usr/lib/jvm/java-21-openjdk-21.0.11.0.10-2.el9.x86_64 (no Daemon JVM specified, using current Java home)
+OS:            Linux 5.14.0-611.36.1.el9_7.x86_64 amd64
+$ mkdir -p "${CI_PROJECT_DIR}/.gradle/init.d"
+$ cat > "${CI_PROJECT_DIR}/.gradle/init.d/epay-artifactory.init.gradle" << 'EOF' # collapsed multi-line command
+$ cp "$JAVA_HOME/lib/security/cacerts" "$CACERT_PATH"
+$ chmod 644 "$CACERT_PATH"
+$ keytool -importcert -keystore "$CACERT_PATH" -storepass changeit -alias jfrog-internal -file "$JF_ARTIFACTORY_CERT" -noprompt
+Certificate was added to keystore
+$ export JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=${CI_PROJECT_DIR}/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit"
+$ keytool -list -keystore "$CACERT_PATH" -storepass changeit -alias jfrog-internal
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit
+jfrog-internal, Jun 17, 2026, trustedCertEntry, 
+Certificate fingerprint (SHA-256): 95:A7:28:EE:11:00:19:F7:94:F4:B5:F7:98:0A:D5:C6:17:5D:8A:6B:F6:97:46:8E:00:CC:CB:D2:56:35:5E:66
+$ set -eo pipefail # collapsed multi-line command
+Building VERSION: mr-feature-epay-00-egras-and-standard-integ-develop-73-82c3c494
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :bootBuildInfo
+> Task :compileJava
+Note: /builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/src/main/java/com/neo/client/project/service/S3Service.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/src/main/java/com/neo/client/project/service/SftpService.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :processResources
+> Task :classes
+> Task :resolveMainClassName
+> Task :bootWar
+> Task :jar
+> Task :war
+> Task :assemble
+> Task :check
+> Task :build
+[Incubating] Problems report is available at: file:///builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator/build/reports/problems/problems-report.html
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+BUILD SUCCESSFUL in 1m 31s
+7 actionable tasks: 7 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
+Build output:
+total 222M
+-rw-r--r--. 1 1001 root 163K Jun 17 06:21 java-utility-api-simulator-mr-feature-epay-00-egras-and-standard-integ-develop-73-82c3c494-plain.jar
+-rw-r--r--. 1 1001 root 106M Jun 17 06:21 java-utility-api-simulator-mr-feature-epay-00-egras-and-standard-integ-develop-73-82c3c494-plain.war
+-rw-r--r--. 1 1001 root 117M Jun 17 06:21 java-utility-api-simulator-mr-feature-epay-00-egras-and-standard-integ-develop-73-82c3c494.war
+Uploading artifacts for failed job
+00:01
+Uploading artifacts...
+WARNING: build.env: no matching files. Ensure that the artifact path is relative to the working directory (/builds/itepaypg-sbiepay2/application/merchantsimulator/java_utility_api_simulator) 
+ERROR: No files to upload                          
+Cleaning up project directory and file based variables
+00:00
+ERROR: Job failed: exit code 1
