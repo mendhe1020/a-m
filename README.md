@@ -1,40 +1,83 @@
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-06-19 06:03:36.662 ERROR | com.sbi.epay.authentication.config.SecurityConfig:859 | principal= | scenario= | operation= | correlation= | reportFailure | Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'communicationConfig': Injection of autowired dependencies failed
-        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:515)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-        at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
-        at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
-        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
-        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-        at com.epay.cs.EpayCommunicationServiceApplication.main(EpayCommunicationServiceApplication.java:19)
-        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-        at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102)
-        at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64)
-        at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40)
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'external.api.eis.services.uat.path' in value "${external.api.eis.services.uat.path}"
-        at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180)
-        at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
-        at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239)
-        at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
-        at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:200)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:964)
-        at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1379)
-        at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1358)
-        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-        at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
-        at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-        ... 22 common frames omitted
+####Default values for Epay_Payment_Service
+replicaCount: 1
+
+image:
+  repository: artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/app/backend/epay_payment_service
+
+  pullPolicy: IfNotPresent
+  tag: "1.2.0-rc.1"
+#
+imagePullSecrets: 
+  - name: jfrog-pull-secret
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount: {}
+
+podAnnotations: {}
+podLabels: {}
+
+configMap: 
+  additionalLabels:
+    # ...
+  annotations:
+    # ...
+  nameSuffix: "config"
+
+
+service:
+  type: ClusterIP
+  port: 9093
+
+namespace: sit-transaction
+gatewayName: sit-istio-system/sit-gateway
+virtualServiceName: payment-paymentservice
+prefixName: /api/payments/v1
+serviceName: payment-paymentservice
+servicePort: 9093
+gatewayPort: 80
+gatewayHost: "sit.epay.sbi"
+
+
+
+ingress: {}
+# readinessProbe: {}
+# livenessProbe: {}
+
+# Enable health probes for proper HPA functioning
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: "/api/payments/v1/actuator/health/readiness"
+    port: 9093
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 10
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: "/api/payments/v1/actuator/health/liveness"
+    port: 9093
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+securityContext: {}
+podSecurityContext: {}
+
+volumes: []
+volumeMounts: []
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+
+
+
