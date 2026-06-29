@@ -1,77 +1,52 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-{{ .Values.configMap.nameSuffix }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{ include "Epay_Admin_Service.labels" . | nindent 4 }}
-{{- if $.Values.configMap.additionalLabels }}
-    {{ toYaml $.Values.configMap.additionalLabels | nindent 4 }}
-{{- end }}
-{{- if $.Values.configMap.annotations }}
-  annotations:
-    {{ toYaml $.Values.configMap.annotations | nindent 4 }}
-{{- end }}
-
-data:
-  application.yml: |
-    spring:
-      datasource:
-        url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=epaydbscandev.sbiepay.sbi)(PORT=1524))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=epaydbdev.sbiepay.sbi)))
-        username: EPAYADMIN
-        password: April_2025
-
-      jpa:
-        hibernate:
-          ddl-auto: none
-
-      kafka:
-        bootstrap-servers: dev-kafka-cluster-kafka-bootstrap.dev-kafka.svc.cluster.local:9092
-        topic-prefix: cdc-oracle-gemfire.LOHITH_M
-        properties:
-          security:
-            protocol: PLAINTEXT
-        consumer:
-          group-id: admin-consumers
-
-    security:
-      cors:
-        allowed-origins: "*"
-      whitelist:
-        urls: /api/transaction/v1/actuator/health/**,/actuator/health/**
-
-    upi:
-      pvt-key-pwd: Uat@Sbiepay
-      server-private-key-path: 0x1D883787-sec.asc
-      server-public-key-path: SBI0000000032588_UAT_1224_PublicKey.asc
-      cors-allowed-origins: https://dev.epay.sbi,http://localhost:9098
-      onboard-sub-merchant-url: https://uatupionline.sbi/merchant-web-war-6.0/upi/onBoardSubMerchant
-      pg-merchant-id: SBI0000000032588
-      business-name: "MahaOnlineLimited 2.0"
-      integration-type: WEBAPI
-      business-type: "Govt, Govt Undertakings"
-      request-url1: https://uat.epay.sbi/api/payments/v1/upi/sbi/callback
-      request-url2: https://uat.epay.sbi/api/payments/v1/upi/sbi/callback
-      ext-mid: "1000003"
-      ext-tid: ""
-      merchant-genre: ONLINE
-      onboarding-type: AGGREGATOR
-      txn-validation: "1|2|3|5"
-      me-whitelist: "Y"
-      me-concent-flag: "N"
-      split-tag: "84"
-      feature-not-supported:
-        - accTypeVal: "05"
-          accType: CREDIT
-        - accTypeVal: "06"
-          accType: PPIWALLET
-        - accTypeVal: "31"
-          accType: CREDITLINE
-
-    logging:
-      level:
-        liquibase: INFO
-        com.epay.sbi: INFO
-        org.apache.kafka: ERROR
-        com.epay.admin: INFO
-        org.springframework: ERROR
+Running with gitlab-runner 17.9.2 (14c5775c)
+  on dc_runner_55 Wz1c0kGRX, system ID: s_300da9d7588c
+Resolving secrets
+Preparing the "docker" executor
+00:01
+Using Docker executor with image artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Authenticating with credentials from $DOCKER_AUTH_CONFIG
+Pulling docker image artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 ...
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Authenticating with credentials from $DOCKER_AUTH_CONFIG
+Pulling docker image artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 ...
+Using docker image sha256:db06a3e48eaa4339a92d53be57a37a699ba188fed41652c6c3c6c07bb86cb6f0 for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm@sha256:65605f26e63ed7624e4711cdd933caf6577f9d309f240d48a295f1d2c790c4d9 ...
+Preparing environment
+00:01
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:4511164d4b592f8cb69c7ffe5cb2df5d1909c1e7924081721495a61e4b03f657 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Running on runner-wz1c0kgrx-project-2838-concurrent-0 via PE3DSOPGrunners4...
+Getting source from Git repository
+00:16
+Fetching changes...
+Initialized empty Git repository in /builds/itepaypg-sbiepay2/infra/devops/deployment/.git/
+Created fresh repository.
+Checking out d1dfd9af as detached HEAD (ref is main)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script
+00:03
+Using docker image sha256:db06a3e48eaa4339a92d53be57a37a699ba188fed41652c6c3c6c07bb86cb6f0 for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm@sha256:65605f26e63ed7624e4711cdd933caf6577f9d309f240d48a295f1d2c790c4d9 ...
+$ set -eo pipefail # collapsed multi-line command
+Detected SERVICE_NAME=epay_admin_service
+Detected ENV=dev
+RAW NAMESPACE=dev-admin
+FINAL VALUES:
+SERVICE_NAME=epay_admin_service
+ENV=dev
+RELEASE_NAME=admin
+NAMESPACE=dev-admin
+Synced dev/charts/epay_admin_service/values.yaml to origin/main
+Error: 1 chart(s) linted, 1 chart(s) failed
+==> Linting dev/charts/epay_admin_service/
+[INFO] Chart.yaml: icon is recommended
+[ERROR] templates/configmap.yaml: unable to parse YAML: error converting YAML to JSON: yaml: line 84: did not find expected key
+Uploading artifacts for failed job
+00:03
+Uploading artifacts...
+build.env: found 1 matching artifact files and directories 
+Uploading artifacts as "dotenv" to coordinator... 201 Created  id=1171669 responseStatus=201 Created token=eyJraWQiO
+Cleaning up project directory and file based variables
+00:00
+ERROR: Job failed: exit code 1
