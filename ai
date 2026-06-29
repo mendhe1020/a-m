@@ -1,165 +1,42 @@
-trident                                            Active   482d
-[osuser@bastion ~]$ oc project perf-simulators
-Already on project "perf-simulators" on server "https://api.preprod.epay.sbi:6443".
-[osuser@bastion ~]$ oc get po
-NAME                                                     READY   STATUS             RESTARTS        AGE
-demo-merchantsimulaterfe-787fd9c47c-vdtnb                2/2     Running            0               123m
-javasimulator-javautilityapisimulator-7fb9bfb9c8-hfmrs   2/2     Running            0               123m
-javasimulator-javautilityapisimulator-7fb9bfb9c8-tsv9p   2/2     Running            0               123m
-perf-perfsimulator-dc4856b94-d6hc8                       2/2     Running            0               123m
-stubsservice-6b996845d5-c87m8                            1/2     Running            8 (6m37s ago)   28m
-stubsservice-6b996845d5-vfpm4                            1/2     CrashLoopBackOff   7 (4m56s ago)   28m
-[osuser@bastion ~]$ oc logs -f stubsservice-6b996845d5-c87m8
-error: You must be logged in to the server (the server has asked for the client to provide credentials ( pods/log stubsservice-6b996845d5-c87m8))
-[osuser@bastion ~]$ oc logs -f stubsservice-6b996845d5-vfpm4
-Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-10:53:17,139 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.5.7
-10:53:17,151 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Here is a list of configurators discovered as a service, by rank:
-10:53:17,151 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
-10:53:17,151 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
-10:53:17,151 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
-10:53:17,162 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 1 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-10:53:17,162 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
-10:53:17,164 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
-10:53:17,166 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
-10:53:17,167 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
-10:53:17,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 3 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-10:53:17,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
-10:53:17,169 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
-10:53:17,170 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-10:53:17,171 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/classes/!/logback.xml]
-10:53:17,173 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@babafc2 - Resource [logback.xml] occurs multiple times on the classpath.
-10:53:17,174 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@babafc2 - Resource [logback.xml] occurs at [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/classes/!/logback.xml]
-10:53:17,174 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@babafc2 - Resource [logback.xml] occurs at [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/lib/notification-service-0.0.1-SNAPSHOT.jar!/logback.xml]
-10:53:17,174 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@babafc2 - Resource [logback.xml] occurs at [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/lib/logging-service-1.0-SNAPSHOT.jar!/logback.xml]
-10:53:17,197 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@31add175 - URL [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/classes/!/logback.xml] is not of type file
-10:53:17,529 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
-10:53:17,529 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-10:53:17,552 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-10:53:17,665 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE]
-10:53:17,665 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-10:53:17,705 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@182670350 - No compression will be used
-10:53:17,708 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@182670350 - Will use the pattern logs/app.%d{yyyy-MM-dd}.log for the active file
-10:53:17,793 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/app.%d{yyyy-MM-dd}.log'.
-10:53:17,793 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
-10:53:17,817 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to 2026-06-29T10:53:17.817Z
-10:53:17,820 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-10:53:17,828 |-WARN in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Setting "File" property to null on account of prudent mode
-10:53:17,829 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/app.2026-06-29.log
-10:53:17,829 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [null]
-10:53:17,832 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [JSON_FILE] not referenced. Skipping further processing.
-10:53:17,832 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [Logstash] not referenced. Skipping further processing.
-10:53:17,832 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
-10:53:17,832 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
-10:53:17,834 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to Logger[ROOT]
-10:53:17,834 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@600b9d27 - End of configuration.
-10:53:17,835 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@3688eb5b - Registering current configuration as safe fallback point
-10:53:17,835 |-INFO in ch.qos.logback.classic.util.ContextInitializer@7393222f - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 666 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
-
-10:53:18,878 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@5a2f016d - URL [jar:nested:/home/default/epay_stubs_service-3.3.6-rc.2.jar/!BOOT-INF/classes/!/logback.xml] is not of type file
-10:53:18,892 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
-10:53:18,892 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-10:53:18,892 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-10:53:18,893 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE]
-10:53:18,893 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-10:53:18,894 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@439925336 - No compression will be used
-10:53:18,894 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@439925336 - Will use the pattern logs/app.%d{yyyy-MM-dd}.log for the active file
-10:53:18,895 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/app.%d{yyyy-MM-dd}.log'.
-10:53:18,895 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
-10:53:18,895 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to 2026-06-29T10:53:18.895Z
-10:53:18,896 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-10:53:18,896 |-WARN in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Setting "File" property to null on account of prudent mode
-10:53:18,896 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/app.2026-06-29.log
-10:53:18,896 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [null]
-10:53:18,897 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [JSON_FILE] not referenced. Skipping further processing.
-10:53:18,897 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [Logstash] not referenced. Skipping further processing.
-10:53:18,897 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
-10:53:18,897 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@3ad394e6 - Propagating INFO level on Logger[ROOT] onto the JUL framework
-10:53:18,899 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
-10:53:18,899 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to Logger[ROOT]
-10:53:18,899 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@6058e535 - End of configuration.
-10:53:18,899 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@42deb43a - Registering current configuration as safe fallback point
-
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.3.3)
-
-2026-06-29 10:53:19 [main] INFO  c.e.s.EpayStubsServiceApplication  - userId= - correlationId= - Starting EpayStubsServiceApplication v3.3.6-rc.2 using Java 21.0.8 with PID 1 (/home/default/epay_stubs_service-3.3.6-rc.2.jar started by 1000810000 in /home/default)
-2026-06-29 10:53:19 [main] INFO  c.e.s.EpayStubsServiceApplication  - userId= - correlationId= - No active profile set, falling back to 1 default profile: "default"
-2026-06-29 10:53:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate  - userId= - correlationId= - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-29 10:53:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate  - userId= - correlationId= - Finished Spring Data repository scanning in 377 ms. Found 7 JPA repository interfaces.
-2026-06-29 10:53:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer  - userId= - correlationId= - Tomcat initialized with port 9099 (http)
-2026-06-29 10:53:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol  - userId= - correlationId= - Initializing ProtocolHandler ["http-nio-9099"]
-2026-06-29 10:53:25 [main] INFO  o.a.catalina.core.StandardService  - userId= - correlationId= - Starting service [Tomcat]
-2026-06-29 10:53:25 [main] INFO  o.a.catalina.core.StandardEngine  - userId= - correlationId= - Starting Servlet engine: [Apache Tomcat/10.1.28]
-2026-06-29 10:53:25 [main] INFO  o.a.c.c.C.[.[.[/api/stubs/payments/v1]  - userId= - correlationId= - Initializing Spring embedded WebApplicationContext
-2026-06-29 10:53:25 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext  - userId= - correlationId= - Root WebApplicationContext: initialization completed in 5850 ms
-Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-2026-06-29 10:53:25 [main] DEBUG o.s.w.f.ServerHttpObservationFilter  - userId= - correlationId= - Filter 'webMvcObservationFilter' configured for use
-2026-06-29 10:53:27 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo  - userId= - correlationId= - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-29 10:53:27 [main] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Starting...
-2026-06-29 10:53:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool  - userId= - correlationId= - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@33197c2f
-2026-06-29 10:53:28 [main] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Start completed.
-2026-06-29 10:53:32 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean  - userId= - correlationId= - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-29 10:53:34 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory  - userId= - correlationId= - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-29 10:53:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration  - userId= - correlationId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-29 10:53:37 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping  - userId= - correlationId= - 28 mappings in 'requestMappingHandlerMapping'
-2026-06-29 10:53:37 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping  - userId= - correlationId= - Patterns [/webjars/**, /**, /swagger-ui.html, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2026-06-29 10:53:37 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter  - userId= - correlationId= - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2026-06-29 10:53:37 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2026-06-29 10:53:38 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver  - userId= - correlationId= - Exposing 1 endpoint beneath base path '/actuator'
-2026-06-29 10:53:39 [main] INFO  o.a.coyote.http11.Http11NioProtocol  - userId= - correlationId= - Starting ProtocolHandler ["http-nio-9099"]
-2026-06-29 10:53:39 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer  - userId= - correlationId= - Tomcat started on port 9099 (http) with context path '/api/stubs/payments/v1'
-2026-06-29 10:53:39 [main] INFO  c.e.s.EpayStubsServiceApplication  - userId= - correlationId= - Started EpayStubsServiceApplication in 20.936 seconds (process running for 23.54)
-2026-06-29 10:53:47 [http-nio-9099-exec-2] INFO  o.a.c.c.C.[.[.[/api/stubs/payments/v1]  - userId= - correlationId= - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-29 10:53:47 [http-nio-9099-exec-2] INFO  o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Initializing Servlet 'dispatcherServlet'
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Detected StandardServletMultipartResolver
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Detected AcceptHeaderLocaleResolver
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Detected FixedThemeResolver
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@569df481
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Detected org.springframework.web.servlet.support.SessionFlashMapManager@1c018f41
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2026-06-29 10:53:47 [http-nio-9099-exec-2] INFO  o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed initialization in 5 ms
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 10:53:47 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 10:53:47 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 10:53:57 [http-nio-9099-exec-3] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 10:53:57 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 10:54:07 [http-nio-9099-exec-5] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 10:54:07 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 10:54:17 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 10:54:17 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-
+2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-29 14:16:38 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
+2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-29 14:16:39 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-29 14:16:48 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-29 14:16:58 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-29 14:17:08 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-29 14:17:16 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
