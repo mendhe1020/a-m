@@ -1,43 +1,90 @@
 IT-EPAY-PG-SBIePay2
 Application
 Backend
-Epay_Admin_Service
-epay_admin_service
+Epay_Gateway_Pooling_old
+epay_gateway_pooling_old
 src
 main
 resources
 application.yml
 application.yml
-Sagar Badodiya's avatar
-EAS-227|SB|Removed gemfire and cms lib
-Sagar Badodiya authored 6 months ago and Amol Gavali committed 6 months ago
-96246904
+V1019620's avatar
+EGP-01|BSR|Initial Code
+Bhoopendra Singh Rajput authored 1 year ago
+a257709f
  Code owners
 Assign users and groups as approvers for specific file changes. Learn more.
 application.yml
-921 B
-
-
-
-=============================================================================================================
-
-IT-EPAY-PG-SBIePay2
-Infra
-DevOps
-deployment
-Repository
-deployment
-dev
-charts
-epay_admin_service
-templates
-configmap.yaml
-configmap.yaml
-Ghanshyam  Baboo's avatar
-Update file configmap.yaml
-Ghanshyam Baboo authored 4 days ago
-da7b8fe9
- Code owners
-Assign users and groups as approvers for specific file changes. Learn more.
-configmap.yaml
-8.86 KiB
+1.96 KiB
+spring:
+  profiles:
+    active: local
+  application.name: epay_gateway_pooling
+# DB connectivity
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 500
+        merchant_order_payment_updates: true
+        merchant_order_payment_inserts: true
+        batch_versioned_data: true
+        generate_statistics: true
+        show-sql: true
+    show-sql: true
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+  jdbc:
+    template:
+      fetch-size: 100000
+  #Kafka consumer config
+  kafka:
+    consumer:
+      groupId: gatewayOfflinePooling-consumers
+      enableAutoCommit: true
+      autoCommitInterval: 100
+      sessionTimeoutMS: 300000
+      requestTimeoutMS: 420000
+      fetchMaxWaitMS: 200
+      maxPollRecords: 5
+      autoOffsetReset: latest
+      keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      retryMaxAttempts: 3
+      retryBackOffInitialIntervalMS: 10000
+      retryBackOffMaxIntervalMS: 30000
+      numberOfConsumers: 1
+    #Kafka producer config
+    producer:
+      acks: all
+      retries: 3
+      batchSize: 1000
+      lingerMs: 1
+      bufferMemory: 33554432
+      keyDeserializer: org.apache.kafka.common.serialization.StringSerializer
+      valueDeserializer: org.apache.kafka.common.serialization.StringSerialize
+epay:
+  payment:
+    inb:
+      gatewayMapId: 86
+    otherinb:
+      success:
+        base:
+          path: https://www.sbiepay.sbi
+      fail:
+        base:
+          path: https://www.sbiepay.sbi
+    other_inb_mid: 1000524
+    other_inb_key: A3FZ8NvgJN4IjD2OYtYQQfEN83Ej13rOVNYm38Prtpo=
+    merchant_post_url: https://uat.sbiepay.sbi/secure/MerchantHostedListener
+    sbiinb:
+      otherinbstatusquery: https://uat.sbiepay.sbi/payagg/statusQuery/getStatusQuery
+gateway:
+  pooling:
+    kafka:
+      sslConfig:
+        provided: no
+    pending:
+      cron_time: "0 */3 * * * *"
+    booked:
+      cron_time: "0 */7 * * * *"
