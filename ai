@@ -1,215 +1,77 @@
-deployment
-dev
-charts
-epay_gateway_pooling
-templates
-configmap.yaml
-configmap.yaml
-Suraj Bharat Andhale V1021495's avatar
-Update file configmap.yaml
-Suraj Bharat Andhale V1021495 authored 4 months ago
-2cb56096
- Code owners
-Assign users and groups as approvers for specific file changes. Learn more.
-configmap.yaml
-7.70 KiB
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-{{ .Values.configMap.nameSuffix }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{ include "epay_gateway_pooling.labels" . | nindent 4 }}
-{{ if $.Values.configMap.additionalLabels }}
+    {{ include "Epay_Admin_Service.labels" . | nindent 4 }}
+{{- if $.Values.configMap.additionalLabels }}
     {{ toYaml $.Values.configMap.additionalLabels | nindent 4 }}
-{{ end }}
-{{ if $.Values.configMap.annotations }}
+{{- end }}
+{{- if $.Values.configMap.annotations }}
   annotations:
     {{ toYaml $.Values.configMap.annotations | nindent 4 }}
-{{ end }}
+{{- end }}
+
 data:
   application.yml: |
-      spring:
-        profiles:
-          active: dev
-        application: 
-          name: epay_gateway_pooling
-      # DB connectivity
-        jpa:
-          database-platform: org.hibernate.dialect.OracleDialect
-          properties:
-            hibernate:
-              jdbc:
-                batch_size: 500
-              merchant_order_payment_updates: true
-              merchant_order_payment_inserts: true
-              batch_versioned_data: true
-              generate_statistics: true
-          show-sql: true
-        datasource:
-          url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=epaydbscandev.sbiepay.sbi)(PORT=1524))(CONNECT_DATA= (SERVER=DEDICATED) (SERVICE_NAME=epaydbdev.sbiepay.sbi)))
-          driver-class-name: oracle.jdbc.OracleDriver
-          username: EPAYTRANSCTION
-          password: April_2025
-        jdbc:
-          template:
-            fetch-size: 100000
-         #GemFire settings -------------------------  
-        data:
-          gemfire:
-            pool:
-              locators: gemfire-dev-locator.dev-cache-gemfire[10334]
-            use-bean-factory-locator: false
-            cache:
-              server:
-                port: 40404
-            logging:
-              level: info
-            security:
-              ssl:
-                keystore: /certs/keystore.p12
-                keystore-password: HHy45TuP6CAjf6XMlxSE12CmyhEoklLv_JcYmy9RcBw=
-                keystore-type: PKCS12
-                truststore: /certs/truststore.p12
-                truststore-password: HHy45TuP6CAjf6XMlxSE12CmyhEoklLv_JcYmy9RcBw=
-                truststore-type: PKCS12
-                enabled-components: all
-                enable-endpoint-identification: false
-                require-authentication: false
-                web-require-authentication: false
-                protocols: any
-                ciphers: any
-        #spring.data.gemfire.pdx.read-serialized=false
-        #spring.data.gemfire.pdx.auto-serializable-classes=com.epay.admin.repository.cache.*
-        logging:
-          level:
-            org:
-              apache:
-                geode: debug
-              springframework:
-                data:
-                  gemfire: debug  
-        #Kafka consumer config
-        kafka:
-          bootstrapServers: dev-kafka-cluster-kafka-bootstrap.dev-kafka.svc.cluster.local:9092
-          consumer:
-            groupId: gatewayOfflinePooling-consumers
-            enableAutoCommit: true
-            autoCommitInterval: 100
-            sessionTimeoutMS: 300000
-            requestTimeoutMS: 420000
-            fetchMaxWaitMS: 200
-            maxPollRecords: 5
-            autoOffsetReset: latest
-            keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
-            valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
-            retryMaxAttempts: 3
-            retryBackOffInitialIntervalMS: 10000
-            retryBackOffMaxIntervalMS: 30000
-            spring.json.trusted.packages: com.epay.gateway
-            numberOfConsumers: 10
-          #Kafka producer config
-          producer:
-            acks: all
-            retries: 3
-            batchSize: 1000
-            lingerMs: 1
-            bufferMemory: 33554432
-            keyDeserializer: org.apache.kafka.common.serialization.StringSerializer
-            valueDeserializer: org.apache.kafka.common.serialization.StringSerializer
-            partitions: 4
-            replicationFactor: 1
-          topic:
-            gateway:
-              pooling:
-                inb: inb_offline_gateway_pooling_local
-                otherINB: otherinb_offline_gateway_pooling_dev_other_inb
-                upiBhimQr: upibhimqr_offline_gateway_pooling_dev_upi_qr
-                upiSelf: upiself_offline_gateway_pooling_dev_upi_self
-            partitions: 4
-            replicationFactor: 1
-        external:
-          api:
-            services:
-              base:
-                path:
-                  admin: http://admin-adminservice.dev-admin.svc.cluster.local:9094/api/admin/v1   
-      external.api.admin.services.base.path: http://admin-adminservice.dev-admin.svc.cluster.local:9094/api/admin/v1   
-      epay:
-        payment:
-          sbiinb:
-            otherinbstatusquery: https://uat.sbiepay.sbi/payagg/otherINBstatusQuery/getTxnStatusQuery
-            bankbrowserurl: https://merchantuat.onlinesbi.sbi/merchant/merchantprelogin.htm
-            bankdvurl: https://merchantuat.onlinesbi.sbi/thirdparties/doubleverification.htm
-            merchantcode: SBIEPAY2
-          otherinb:
-            success:
-              base:
-                path: https://www.sbiepay.sbi
-            fail:
-              base:
-                path: https://www.sbiepay.sbi
-          inb:       
-            gatewayMapId: 86
-            other_inb_mid: 1000524
-            other_inb_key: A3FZ8NvgJN4IjD2OYtYQQfEN83Ej13rOVNYm38Prtpo=
-            merchant_post_url: https://uat.sbiepay.sbi/secure/MerchantHostedListener
-          upi :
-            upiGatewayMapId: 182
-          other_inb_mid: 1000524
-          other_inb_key: A3FZ8NvgJN4IjD2OYtYQQfEN83Ej13rOVNYm38Prtpo=
-          merchant_post_url: https://uat.sbiepay.sbi/secure/MerchantHostedListener
-      gateway:
-        pooling:
-          pending:
-            cron_time: 0/60 * * * * *
-          booked:
-            cron_time: 0/60 * * * * *
-            upi:
-              cron_time: 0/60 * * * * *
-      server:
-        servlet:
-          context-path: /jobs/gatewaypooling/v1/
-        port: 9099
- 
-      UPI:
-        OAUTH_USERNAME: oauth2-api-merweb-SBI0000000032588
-        OAUTH_PASSWORD: 05B6948CCFCA37A74B3DDDD15F9482040A998019ED67D2C77B4F5554DCB48B13
-        UPI_CLIENT_ID: SBIEPAY_MID_2.0
-        SECRETKEY: f65e8f0a484d45babd33c10b4535ef66
-        OAUTH_TOKEN_URL: https://uatupionline.sbi/upi2/oauth/token
-        VALIDATE_VPA_CHECK_URL: https://uatupionline.sbi/upi2/upi/web/v2.0/validateVPAWeb
-        VPA_COLLECT_URL: https://uatupionline.sbi/upi2/upi/web/v2.0/meCollectInitiateWeb
-        TXN_STATUS_ENQUIRY_URL: https://uatupionline.sbi/upi2/upi/web/v2.0/meTranStatusQueryWeb
-        EPAY_PVT_KEY_PATH: keys/0x1D883787-sec.asc
-        UPI_SBI_PUBLIC_KEY_PATH: keys/SBI0000000032588_UAT_1224_PublicKey.asc
-        PACKET_ENCRYPTION_KEY: 25dea54b392d9b24803d95e2df4d11d8
-        TXN_STATUS_ENQUIRY_API_URL:
-        INTENT_API_URL: https://uatupionline.sbi/upi2/upi/mandate/signVerifyIntent
-        HANDSHAKE_API_URL: https://uatupionline.sbi/upi2/upi/oauth2-web-handshake
-        UPI_CONFIG_DEATILS_URL: http://admin-adminservice.dev-admin.svc.cluster.local:9094/api/admin/v1/merchant/upi/getUpiConfigDeatils
-        upiGatewayConfigDetailsUrl:
-        UPICONFIG:
-          URL: http://admin-adminservice.dev-admin.svc.cluster.local:9094/api/admin/v1/merchant/upi/getUpiConfigDeatils
-      PG :
-        UPI_MERCHANT_ID: SBI0000000032588
-      UPI_PVT_KEY_PWD: Uat@Sbiepay
-      UPI_ivtoken: 2F70CBBDFAE8DBA95F46CEB68A970673
-      UPI_intentMode: 05
-      UPI_keyid: 10
-      UPI_mode: 05
-      UPI_purpose: 00
-      UPI_qrMedium: 06
-      UPI_ver: 01
-      UPI_cu: INR
-      UPI_tier: TIER1
-      UPI_category: 01
-      UPI_upiQrVpa: testmerchant@sbi
-      UPI_businessName: TestMerchant
-      UPI_mccCode: 9399
-      UPI.TXN_STATUS_ENQUIRY_API_URL:
-      UPI.VPA_CHECK_API_URL:
-      security:
-        cors:
-          origin: https://dev.epay.sbi
-      
+    spring:
+      datasource:
+        url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=epaydbscandev.sbiepay.sbi)(PORT=1524))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=epaydbdev.sbiepay.sbi)))
+        username: EPAYADMIN
+        password: April_2025
+
+      jpa:
+        hibernate:
+          ddl-auto: none
+
+      kafka:
+        bootstrap-servers: dev-kafka-cluster-kafka-bootstrap.dev-kafka.svc.cluster.local:9092
+        topic-prefix: cdc-oracle-gemfire.LOHITH_M
+        properties:
+          security:
+            protocol: PLAINTEXT
+        consumer:
+          group-id: admin-consumers
+
+    security:
+      cors:
+        allowed-origins: "*"
+      whitelist:
+        urls: /api/transaction/v1/actuator/health/**,/actuator/health/**
+
+    upi:
+      pvt-key-pwd: Uat@Sbiepay
+      server-private-key-path: 0x1D883787-sec.asc
+      server-public-key-path: SBI0000000032588_UAT_1224_PublicKey.asc
+      cors-allowed-origins: https://dev.epay.sbi,http://localhost:9098
+      onboard-sub-merchant-url: https://uatupionline.sbi/merchant-web-war-6.0/upi/onBoardSubMerchant
+      pg-merchant-id: SBI0000000032588
+      business-name: "MahaOnlineLimited 2.0"
+      integration-type: WEBAPI
+      business-type: "Govt, Govt Undertakings"
+      request-url1: https://uat.epay.sbi/api/payments/v1/upi/sbi/callback
+      request-url2: https://uat.epay.sbi/api/payments/v1/upi/sbi/callback
+      ext-mid: "1000003"
+      ext-tid: ""
+      merchant-genre: ONLINE
+      onboarding-type: AGGREGATOR
+      txn-validation: "1|2|3|5"
+      me-whitelist: "Y"
+      me-concent-flag: "N"
+      split-tag: "84"
+      feature-not-supported:
+        - accTypeVal: "05"
+          accType: CREDIT
+        - accTypeVal: "06"
+          accType: PPIWALLET
+        - accTypeVal: "31"
+          accType: CREDITLINE
+
+    logging:
+      level:
+        liquibase: INFO
+        com.epay.sbi: INFO
+        org.apache.kafka: ERROR
+        com.epay.admin: INFO
+        org.springframework: ERROR
