@@ -1,3 +1,5 @@
  oc describe pod ------
  oc logs ------- | grep -i ----
  oc get deployment
+oc logs pode name -c ------container name --tail=200
+oc describe pod -------- | tail -50
