@@ -1,9 +1,2 @@
-[osuser@bastion ~]$ oc get po
-NAME                                                     READY   STATUS    RESTARTS        AGE
-demo-merchantsimulaterfe-787fd9c47c-vdtnb                2/2     Running   0               20h
-javasimulator-javautilityapisimulator-7fb9bfb9c8-hfmrs   2/2     Running   0               20h
-javasimulator-javautilityapisimulator-7fb9bfb9c8-tsv9p   2/2     Running   0               20h
-perf-perfsimulator-dc4856b94-d6hc8                       2/2     Running   0               20h
-stubsservice-658fb9866b-j6bms                            1/2     Running   135 (42s ago)   12h
-stubsservice-658fb9866b-zt5tl                            1/2     Running   135 (46s ago)   12h
-[osuser@bastion ~]$
+oc logs stubsservice-658fb9866b-zt5tl -c stubsservice --tail=200
+oc describe pod stubsservice-658fb9866b-zt5tl | tail -50
