@@ -1,42 +1,116 @@
-2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 14:16:38 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
-2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 14:16:38 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 14:16:39 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 14:16:48 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 14:16:48 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 14:16:58 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 14:16:58 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 14:17:08 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 14:17:08 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-29 14:17:16 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException 
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-29 14:17:16 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+[osuser@bastion ~]$ oc describe pod  stubsservice-658fb9866b-zt5tl
+Name:             stubsservice-658fb9866b-zt5tl
+Namespace:        perf-simulators
+Priority:         0
+Service Account:  stubsservice
+Node:             worker1.preprod.epay.sbi/10.177.143.153
+Start Time:       Mon, 29 Jun 2026 22:47:29 +0530
+Labels:           app.kubernetes.io/instance=stubsservice
+                  app.kubernetes.io/name=stubsservice
+                  pod-template-hash=658fb9866b
+                  security.istio.io/tlsMode=istio
+                  service.istio.io/canonical-name=stubsservice
+                  service.istio.io/canonical-revision=latest
+Annotations:      dynakube.dynatrace.com/injected: true
+                  istio.io/rev: perf-istio
+                  k8s.ovn.org/pod-networks:
+                    {"default":{"ip_addresses":["172.16.10.65/23"],"mac_address":"0a:58:ac:10:0a:41","gateway_ips":["172.16.10.1"],"routes":[{"dest":"172.16.0...
+                  k8s.v1.cni.cncf.io/network-status:
+                    [{
+                        "name": "ovn-kubernetes",
+                        "interface": "eth0",
+                        "ips": [
+                            "172.16.10.65"
+                        ],
+                        "mac": "0a:58:ac:10:0a:41",
+                        "default": true,
+                        "dns": {}
+                    }]
+                  k8s.v1.cni.cncf.io/networks: default/istio-cni
+                  kubectl.kubernetes.io/default-container: stubsservice
+                  kubectl.kubernetes.io/default-logs-container: stubsservice
+                  metadata-enrichment.dynatrace.com/injected: true
+                  metadata.dynatrace.com: {}
+                  metadata.dynatrace.com/k8s.workload.kind: deployment
+                  metadata.dynatrace.com/k8s.workload.name: stubsservice
+                  oneagent.dynatrace.com/injected: true
+                  openshift.io/scc: restricted-v2
+                  prometheus.io/path: /stats/prometheus
+                  prometheus.io/port: 15020
+                  prometheus.io/scrape: true
+                  seccomp.security.alpha.kubernetes.io/pod: runtime/default
+                  sidecar.istio.io/interceptionMode: REDIRECT
+                  sidecar.istio.io/status:
+                    {"initContainers":["istio-validation"],"containers":["istio-proxy"],"volumes":["workload-socket","credential-socket","workload-certs","ist...
+                  traffic.sidecar.istio.io/excludeInboundPorts: 15020
+                  traffic.sidecar.istio.io/includeInboundPorts: *
+                  traffic.sidecar.istio.io/includeOutboundIPRanges: *
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               172.16.10.65
+IPs:
+  IP:           172.16.10.65
+Controlled By:  ReplicaSet/stubsservice-658fb9866b
+Init Containers:
+  istio-validation:
+    Container ID:  cri-o://42ad7754c0db2586566a3a1393d620fcc3854dd9bc803f94aff5b27d2b64bccd
+    Image:         registry.redhat.io/openshift-service-mesh/istio-proxyv2-rhel9@sha256:17db00a219de14e5901b5a5eca64d3c6684ca74c1dba3ae3b03787c655fe9c80
+    Image ID:      registry.redhat.io/openshift-service-mesh/istio-proxyv2-rhel9@sha256:177511d297b8fa5c15ab6377e4d907dc3fe3c2db7cfbd35b3b252f8bac632d1b
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      istio-iptables
+      -p
+      15001
+      -z
+      15006
+      -u
+      1000819999
+      -m
+      REDIRECT
+      -i
+      *
+      -x
+
+      -b
+      *
+      -d
+      15090,15021,15020
+      --log_output_level=default:info
+      --run-validation
+      --skip-rule-apply
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 29 Jun 2026 22:47:30 +0530
+      Finished:     Mon, 29 Jun 2026 22:47:30 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     2
+      memory:  1Gi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hgwl9 (ro)
+  dynatrace-operator:
+    Container ID:  cri-o://fc611686cf5ef277629e63ad81b0846fb0ce3cf11fbd300be9c9f6a7617a9894
+    Image:         epaynonprod-registry-quay-quay-enterprise.apps.preprod.epay.sbi/dynatrace/dynatrace-operator:1.7.1
+    Image ID:      epaynonprod-registry-quay-quay-enterprise.apps.preprod.epay.sbi/dynatrace/dynatrace-operator@sha256:5c95f9882d3d3c505e69ec558f5d397264610d8a4970d5400c5411ef60430958
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      bootstrap
+      --config-directory=/mnt/config
+      --input-directory=/mnt/input
+      --suppress-error
+      --source=/opt/dynatrace/oneagent
+      --target=/mnt/bin
+      --install-path=/opt/dynatrace/oneagent-paas
+      --fullstack
+      --tenant=64d5c751-2d94-4f1b-aba4-2f9d79a47620
+      --attribute=k8s.workload.kind=deployment
+      --attribute=k8s.workload.name=stubsservice
+      --metadata-enrichment
