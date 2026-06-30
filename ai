@@ -1,2 +1,212 @@
-oc logs stubsservice-658fb9866b-zt5tl -c stubsservice --tail=200
-oc describe pod stubsservice-658fb9866b-zt5tl | tail -50
+[osuser@bastion ~]$ oc project perf-simulators
+Already on project "perf-simulators" on server "https://api.preprod.epay.sbi:6443".
+[osuser@bastion ~]$ oc get po
+NAME                                                     READY   STATUS             RESTARTS          AGE
+demo-merchantsimulaterfe-787fd9c47c-vdtnb                2/2     Running            0                 20h
+javasimulator-javautilityapisimulator-7fb9bfb9c8-hfmrs   2/2     Running            0                 20h
+javasimulator-javautilityapisimulator-7fb9bfb9c8-tsv9p   2/2     Running            0                 20h
+perf-perfsimulator-dc4856b94-d6hc8                       2/2     Running            0                 20h
+stubsservice-658fb9866b-j6bms                            1/2     CrashLoopBackOff   135 (3m13s ago)   12h
+stubsservice-658fb9866b-zt5tl                            1/2     CrashLoopBackOff   135 (3m17s ago)   12h
+[osuser@bastion ~]$ oc logs stubsservice-658fb9866b-zt5tl -c stubsservice --tail=200
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:14 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:24 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:34 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:44 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:50 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:54 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:23:58 [http-nio-9099-exec-5] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:08 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:10 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:18 [http-nio-9099-exec-9] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:28 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:30 [http-nio-9099-exec-3] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:38 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:48 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:50 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:24:58 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:08 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:10 [http-nio-9099-exec-3] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:18 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:21 [http-nio-9099-exec-9] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:30 [http-nio-9099-exec-10] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
+2026-06-30 05:25:30 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
+2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
+2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean  - userId= - correlationId= - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Shutdown initiated...
+2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Shutdown completed.
+[osuser@bastion ~]$ oc describe pod stubsservice-658fb9866b-zt5tl | tail -50
