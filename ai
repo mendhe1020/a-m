@@ -1,212 +1,1878 @@
-[osuser@bastion ~]$ oc project perf-simulators
-Already on project "perf-simulators" on server "https://api.preprod.epay.sbi:6443".
-[osuser@bastion ~]$ oc get po
-NAME                                                     READY   STATUS             RESTARTS          AGE
-demo-merchantsimulaterfe-787fd9c47c-vdtnb                2/2     Running            0                 20h
-javasimulator-javautilityapisimulator-7fb9bfb9c8-hfmrs   2/2     Running            0                 20h
-javasimulator-javautilityapisimulator-7fb9bfb9c8-tsv9p   2/2     Running            0                 20h
-perf-perfsimulator-dc4856b94-d6hc8                       2/2     Running            0                 20h
-stubsservice-658fb9866b-j6bms                            1/2     CrashLoopBackOff   135 (3m13s ago)   12h
-stubsservice-658fb9866b-zt5tl                            1/2     CrashLoopBackOff   135 (3m17s ago)   12h
-[osuser@bastion ~]$ oc logs stubsservice-658fb9866b-zt5tl -c stubsservice --tail=200
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:14 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:14 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:24 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:24 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:34 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:34 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:44 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:44 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:50 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:50 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:54 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:54 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:23:58 [http-nio-9099-exec-5] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:23:58 [http-nio-9099-exec-5] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:08 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:08 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:10 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:10 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:18 [http-nio-9099-exec-9] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:18 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:28 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:28 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:30 [http-nio-9099-exec-3] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:30 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:38 [http-nio-9099-exec-4] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:38 [http-nio-9099-exec-4] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:48 [http-nio-9099-exec-7] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:48 [http-nio-9099-exec-7] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:50 [http-nio-9099-exec-8] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:50 [http-nio-9099-exec-8] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:24:58 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:24:58 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:08 [http-nio-9099-exec-2] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:08 [http-nio-9099-exec-2] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:10 [http-nio-9099-exec-3] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:10 [http-nio-9099-exec-3] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:18 [http-nio-9099-exec-6] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:18 [http-nio-9099-exec-6] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:21 [http-nio-9099-exec-9] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:21 [http-nio-9099-exec-9] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:30 [http-nio-9099-exec-10] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:30 [http-nio-9099-exec-10] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - GET "/api/stubs/payments/v1/actuator/health", parameters={}
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor  - userId= - correlationId= - Read "application/octet-stream" to []
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Using @ExceptionHandler com.epay.stubs.exceptionhandlers.PaymentExceptionHandler#handleGenericException(Exception, WebRequest)
-2026-06-30 05:25:30 [http-nio-9099-exec-1] ERROR c.e.s.e.PaymentExceptionHandler  - userId= - correlationId= - Error in handleGenericException
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor  - userId= - correlationId= - Writing [ResponseDto{status=0, data=null}]
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver  - userId= - correlationId= - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.NoSuchMethodError: 'java.lang.String com.fasterxml.jackson.annotation.JsonProperty.namespace()']
-2026-06-30 05:25:30 [http-nio-9099-exec-1] DEBUG o.s.web.servlet.DispatcherServlet  - userId= - correlationId= - Completed 500 INTERNAL_SERVER_ERROR
-2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean  - userId= - correlationId= - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Shutdown initiated...
-2026-06-30 05:25:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource  - userId= - correlationId= - HikariPool-1 - Shutdown completed.
-[osuser@bastion ~]$ oc describe pod stubsservice-658fb9866b-zt5tl | tail -50
+Running with gitlab-runner 17.9.2 (14c5775c)
+  on dc_runner_80 KtJCK3d-w, system ID: s_37748334dac5
+Resolving secrets
+Preparing the "docker" executor
+00:01
+Using Docker executor with image artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using locally found image version due to "if-not-present" pull policy
+Using docker image sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Using locally found image version due to "if-not-present" pull policy
+Using docker image sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle@sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de ...
+Preparing environment
+00:01
+Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v17.9.2 )
+Using docker image sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 for artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper:x86_64-v17.9.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab-runner-helper/gitlab-runner-helper@sha256:47dfd72820e9c3b93c84dcdc2e689ba1236880b4c01de59bbf0a26f9e72b2a35 ...
+Running on runner-ktjck3d-w-project-2757-concurrent-0 via PE3DSOPGRUNNERS6...
+Getting source from Git repository
+00:03
+Fetching changes with git depth set to 20...
+Initialized empty Git repository in /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.git/
+Created fresh repository.
+Checking out 3d52c9f6 as detached HEAD (ref is refs/merge-requests/75/head)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script
+00:46
+Using docker image sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle:1.0.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-virtual/custom-ci/epay-build-java-gradle@sha256:dc0868734113da7beffde7b6f2dbbb14696a3fc39200e1a308b370c0b3bf72de ...
+$ java -version
+openjdk version "21.0.11" 2026-04-21 LTS
+OpenJDK Runtime Environment (Red_Hat-21.0.11.0.10-1) (build 21.0.11+10-LTS)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.11.0.10-1) (build 21.0.11+10-LTS, mixed mode, sharing)
+$ gradle --version
+Welcome to Gradle 9.4.1!
+Here are the highlights of this release:
+ - Java 26 support
+ - Non-class-based JVM tests
+ - Enhanced console progress bar
+For more details see https://docs.gradle.org/9.4.1/release-notes.html
+------------------------------------------------------------
+Gradle 9.4.1
+------------------------------------------------------------
+Build time:    2026-03-19 08:46:28 UTC
+Revision:      2d6327017519d23b96af35865dc997fcb544fb40
+Kotlin:        2.3.0
+Groovy:        4.0.29
+Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
+Launcher JVM:  21.0.11 (Red Hat, Inc. 21.0.11+10-LTS)
+Daemon JVM:    /usr/lib/jvm/java-21-openjdk-21.0.11.0.10-2.el9.x86_64 (no Daemon JVM specified, using current Java home)
+OS:            Linux 5.14.0-611.54.1.el9_7.x86_64 amd64
+$ mkdir -p "${CI_PROJECT_DIR}/.gradle/init.d"
+$ cat > "${CI_PROJECT_DIR}/.gradle/init.d/epay-artifactory.init.gradle" << 'EOF' # collapsed multi-line command
+$ cp "$JAVA_HOME/lib/security/cacerts" "$CACERT_PATH"
+$ chmod 644 "$CACERT_PATH"
+$ keytool -importcert -keystore "$CACERT_PATH" -storepass changeit -alias jfrog-internal -file "$JF_ARTIFACTORY_CERT" -noprompt
+Certificate was added to keystore
+$ export JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=${CI_PROJECT_DIR}/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit"
+$ keytool -list -keystore "$CACERT_PATH" -storepass changeit -alias jfrog-internal
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit
+jfrog-internal, Jul 3, 2026, trustedCertEntry, 
+Certificate fingerprint (SHA-256): 95:A7:28:EE:11:00:19:F7:94:F4:B5:F7:98:0A:D5:C6:17:5D:8A:6B:F6:97:46:8E:00:CC:CB:D2:56:35:5E:66
+$ set -eo pipefail # collapsed multi-line command
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+Initialization script '/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle': line 18
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.4.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at epay_artifactory_init_bbrlpyk6c2r7dw96pnkwim1hm$_run_closure1$_closure2$_closure4$_closure5.doCall$original(/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle:18)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at epay_artifactory_init_bbrlpyk6c2r7dw96pnkwim1hm$_run_closure1$_closure2$_closure4.doCall$original(/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle:17)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Initialization script '/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle': line 36
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('url = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.4.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at epay_artifactory_init_bbrlpyk6c2r7dw96pnkwim1hm$_run_closure1$_closure3$_closure7$_closure8.doCall$original(/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle:36)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at epay_artifactory_init_bbrlpyk6c2r7dw96pnkwim1hm$_run_closure1$_closure3$_closure7.doCall$original(/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/.gradle/init.d/epay-artifactory.init.gradle:35)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+> Task :dependencies
+------------------------------------------------------------
+Root project 'java-utility-api-simulator'
+------------------------------------------------------------
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.springframework.boot:spring-boot-starter-web -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9
+|    |    +--- org.springframework.boot:spring-boot:3.5.9
+|    |    |    +--- org.springframework:spring-core:6.2.15
+|    |    |    |    \--- org.springframework:spring-jcl:6.2.15
+|    |    |    \--- org.springframework:spring-context:6.2.15
+|    |    |         +--- org.springframework:spring-aop:6.2.15
+|    |    |         |    +--- org.springframework:spring-beans:6.2.15
+|    |    |         |    |    \--- org.springframework:spring-core:6.2.15 (*)
+|    |    |         |    \--- org.springframework:spring-core:6.2.15 (*)
+|    |    |         +--- org.springframework:spring-beans:6.2.15 (*)
+|    |    |         +--- org.springframework:spring-core:6.2.15 (*)
+|    |    |         +--- org.springframework:spring-expression:6.2.15
+|    |    |         |    \--- org.springframework:spring-core:6.2.15 (*)
+|    |    |         \--- io.micrometer:micrometer-observation:1.14.14 -> 1.15.7
+|    |    |              \--- io.micrometer:micrometer-commons:1.15.7
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:3.5.9
+|    |    |    \--- org.springframework.boot:spring-boot:3.5.9 (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:3.5.9
+|    |    |    +--- ch.qos.logback:logback-classic:1.5.22
+|    |    |    |    +--- ch.qos.logback:logback-core:1.5.22
+|    |    |    |    \--- org.slf4j:slf4j-api:2.0.17
+|    |    |    +--- org.apache.logging.log4j:log4j-to-slf4j:2.24.3
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.24.3
+|    |    |    |    \--- org.slf4j:slf4j-api:2.0.16 -> 2.0.17
+|    |    |    \--- org.slf4j:jul-to-slf4j:2.0.17
+|    |    |         \--- org.slf4j:slf4j-api:2.0.17
+|    |    +--- jakarta.annotation:jakarta.annotation-api:2.1.1
+|    |    +--- org.springframework:spring-core:6.2.15 (*)
+|    |    \--- org.yaml:snakeyaml:2.4
+|    +--- org.springframework.boot:spring-boot-starter-json:3.5.9
+|    |    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    |    +--- org.springframework:spring-web:6.2.15
+|    |    |    +--- org.springframework:spring-beans:6.2.15 (*)
+|    |    |    +--- org.springframework:spring-core:6.2.15 (*)
+|    |    |    \--- io.micrometer:micrometer-observation:1.14.14 -> 1.15.7 (*)
+|    |    +--- com.fasterxml.jackson.core:jackson-databind:2.19.4
+|    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.19.4
+|    |    |    |    \--- com.fasterxml.jackson:jackson-bom:2.19.4
+|    |    |    |         +--- com.fasterxml.jackson.core:jackson-annotations:2.19.4 (c)
+|    |    |    |         +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (c)
+|    |    |    |         +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (c)
+|    |    |    |         +--- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.19.4 (c)
+|    |    |    |         +--- com.fasterxml.jackson.datatype:jackson-datatype-joda:2.19.4 -> 2.12.3 (c)
+|    |    |    |         +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.4 (c)
+|    |    |    |         +--- com.fasterxml.jackson.module:jackson-module-parameter-names:2.19.4 (c)
+|    |    |    |         \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.4 (c)
+|    |    |    +--- com.fasterxml.jackson.core:jackson-core:2.19.4
+|    |    |    |    \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    |    |    \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    |    +--- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.19.4
+|    |    |    +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (*)
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (*)
+|    |    |    \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    |    +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.4
+|    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.19.4 (*)
+|    |    |    +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (*)
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (*)
+|    |    |    \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    |    \--- com.fasterxml.jackson.module:jackson-module-parameter-names:2.19.4
+|    |         +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (*)
+|    |         +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (*)
+|    |         \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:3.5.9
+|    |    +--- jakarta.annotation:jakarta.annotation-api:2.1.1
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:10.1.50
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:10.1.50
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:10.1.50
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:10.1.50
+|    +--- org.springframework:spring-web:6.2.15 (*)
+|    \--- org.springframework:spring-webmvc:6.2.15
+|         +--- org.springframework:spring-aop:6.2.15 (*)
+|         +--- org.springframework:spring-beans:6.2.15 (*)
+|         +--- org.springframework:spring-context:6.2.15 (*)
+|         +--- org.springframework:spring-core:6.2.15 (*)
+|         +--- org.springframework:spring-expression:6.2.15 (*)
+|         \--- org.springframework:spring-web:6.2.15 (*)
++--- org.springframework.boot:spring-boot-starter-actuator -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-actuator-autoconfigure:3.5.9
+|    |    +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (*)
+|    |    +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.4 (*)
+|    |    +--- org.springframework.boot:spring-boot:3.5.9 (*)
+|    |    +--- org.springframework.boot:spring-boot-actuator:3.5.9
+|    |    |    \--- org.springframework.boot:spring-boot:3.5.9 (*)
+|    |    \--- org.springframework.boot:spring-boot-autoconfigure:3.5.9 (*)
+|    +--- io.micrometer:micrometer-observation:1.15.7 (*)
+|    \--- io.micrometer:micrometer-jakarta9:1.15.7
+|         +--- io.micrometer:micrometer-core:1.15.7
+|         |    +--- io.micrometer:micrometer-commons:1.15.7
+|         |    +--- io.micrometer:micrometer-observation:1.15.7 (*)
+|         |    +--- org.hdrhistogram:HdrHistogram:2.2.2
+|         |    \--- org.latencyutils:LatencyUtils:2.0.3
+|         +--- io.micrometer:micrometer-commons:1.15.7
+|         \--- io.micrometer:micrometer-observation:1.15.7 (*)
++--- org.springframework.boot:spring-boot-starter-security -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework:spring-aop:6.2.15 (*)
+|    +--- org.springframework.security:spring-security-config:6.5.7
+|    |    +--- org.springframework.security:spring-security-core:6.5.7
+|    |    |    +--- org.springframework.security:spring-security-crypto:6.5.7
+|    |    |    +--- org.springframework:spring-aop:6.2.13 -> 6.2.15 (*)
+|    |    |    +--- org.springframework:spring-beans:6.2.13 -> 6.2.15 (*)
+|    |    |    +--- org.springframework:spring-context:6.2.13 -> 6.2.15 (*)
+|    |    |    +--- org.springframework:spring-core:6.2.13 -> 6.2.15 (*)
+|    |    |    +--- org.springframework:spring-expression:6.2.13 -> 6.2.15 (*)
+|    |    |    \--- io.micrometer:micrometer-observation:1.14.13 -> 1.15.7 (*)
+|    |    +--- org.springframework:spring-aop:6.2.13 -> 6.2.15 (*)
+|    |    +--- org.springframework:spring-beans:6.2.13 -> 6.2.15 (*)
+|    |    +--- org.springframework:spring-context:6.2.13 -> 6.2.15 (*)
+|    |    \--- org.springframework:spring-core:6.2.13 -> 6.2.15 (*)
+|    \--- org.springframework.security:spring-security-web:6.5.7
+|         +--- org.springframework.security:spring-security-core:6.5.7 (*)
+|         +--- org.springframework:spring-core:6.2.13 -> 6.2.15 (*)
+|         +--- org.springframework:spring-aop:6.2.13 -> 6.2.15 (*)
+|         +--- org.springframework:spring-beans:6.2.13 -> 6.2.15 (*)
+|         +--- org.springframework:spring-context:6.2.13 -> 6.2.15 (*)
+|         +--- org.springframework:spring-expression:6.2.13 -> 6.2.15 (*)
+|         \--- org.springframework:spring-web:6.2.13 -> 6.2.15 (*)
++--- org.springframework.boot:spring-boot-starter-mail -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework:spring-context-support:6.2.15 -> 5.3.30
+|    |    +--- org.springframework:spring-beans:5.3.30 -> 6.2.15 (*)
+|    |    +--- org.springframework:spring-context:5.3.30 -> 6.2.15 (*)
+|    |    \--- org.springframework:spring-core:5.3.30 -> 6.2.15 (*)
+|    \--- org.eclipse.angus:jakarta.mail:2.0.5
+|         +--- jakarta.activation:jakarta.activation-api:2.1.4
+|         \--- org.eclipse.angus:angus-activation:2.0.3
+|              \--- jakarta.activation:jakarta.activation-api:2.1.4
++--- org.springframework.boot:spring-boot-starter-aop -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework:spring-aop:6.2.15 (*)
+|    \--- org.aspectj:aspectjweaver:1.9.25.1
++--- org.springframework.boot:spring-boot-starter-webflux -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-starter-json:3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-starter-reactor-netty:3.5.9
+|    |    \--- io.projectreactor.netty:reactor-netty-http:1.2.13
+|    |         +--- io.netty:netty-codec-http:4.1.128.Final -> 4.1.130.Final
+|    |         |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-buffer:4.1.130.Final
+|    |         |    |    \--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-transport:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    |    \--- io.netty:netty-resolver:4.1.130.Final
+|    |         |    |         \--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-codec:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    |    \--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    \--- io.netty:netty-handler:4.1.130.Final
+|    |         |         +--- io.netty:netty-common:4.1.130.Final
+|    |         |         +--- io.netty:netty-resolver:4.1.130.Final (*)
+|    |         |         +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |         +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |         +--- io.netty:netty-transport-native-unix-common:4.1.130.Final
+|    |         |         |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |         |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |         |    \--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |         \--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         +--- io.netty:netty-codec-http2:4.1.128.Final -> 4.1.130.Final
+|    |         |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-handler:4.1.130.Final (*)
+|    |         |    \--- io.netty:netty-codec-http:4.1.130.Final (*)
+|    |         +--- io.netty:netty-resolver-dns:4.1.128.Final -> 4.1.130.Final
+|    |         |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-resolver:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-codec-dns:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    |    \--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         |    \--- io.netty:netty-handler:4.1.130.Final (*)
+|    |         +--- io.netty:netty-resolver-dns-native-macos:4.1.128.Final -> 4.1.130.Final
+|    |         |    \--- io.netty:netty-resolver-dns-classes-macos:4.1.130.Final
+|    |         |         +--- io.netty:netty-common:4.1.130.Final
+|    |         |         +--- io.netty:netty-resolver-dns:4.1.130.Final (*)
+|    |         |         \--- io.netty:netty-transport-native-unix-common:4.1.130.Final (*)
+|    |         +--- io.netty:netty-transport-native-epoll:4.1.128.Final -> 4.1.130.Final
+|    |         |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-transport-native-unix-common:4.1.130.Final (*)
+|    |         |    \--- io.netty:netty-transport-classes-epoll:4.1.130.Final
+|    |         |         +--- io.netty:netty-common:4.1.130.Final
+|    |         |         +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |         +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |         \--- io.netty:netty-transport-native-unix-common:4.1.130.Final (*)
+|    |         +--- io.projectreactor.netty:reactor-netty-core:1.2.13
+|    |         |    +--- io.netty:netty-handler:4.1.128.Final -> 4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-handler-proxy:4.1.128.Final -> 4.1.130.Final
+|    |         |    |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    |    +--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         |    |    +--- io.netty:netty-codec-socks:4.1.130.Final
+|    |         |    |    |    +--- io.netty:netty-common:4.1.130.Final
+|    |         |    |    |    +--- io.netty:netty-buffer:4.1.130.Final (*)
+|    |         |    |    |    +--- io.netty:netty-transport:4.1.130.Final (*)
+|    |         |    |    |    \--- io.netty:netty-codec:4.1.130.Final (*)
+|    |         |    |    \--- io.netty:netty-codec-http:4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-resolver-dns:4.1.128.Final -> 4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-resolver-dns-native-macos:4.1.128.Final -> 4.1.130.Final (*)
+|    |         |    +--- io.netty:netty-transport-native-epoll:4.1.128.Final -> 4.1.130.Final (*)
+|    |         |    \--- io.projectreactor:reactor-core:3.7.14
+|    |         |         \--- org.reactivestreams:reactive-streams:1.0.4
+|    |         \--- io.projectreactor:reactor-core:3.7.14 (*)
+|    +--- org.springframework:spring-web:6.2.15 (*)
+|    \--- org.springframework:spring-webflux:6.2.15
+|         +--- org.springframework:spring-beans:6.2.15 (*)
+|         +--- org.springframework:spring-core:6.2.15 (*)
+|         +--- org.springframework:spring-web:6.2.15 (*)
+|         \--- io.projectreactor:reactor-core:3.7.14 (*)
++--- org.springframework.boot:spring-boot-starter-validation -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.apache.tomcat.embed:tomcat-embed-el:10.1.50
+|    \--- org.hibernate.validator:hibernate-validator:8.0.3.Final
+|         +--- jakarta.validation:jakarta.validation-api:3.0.2
+|         +--- org.jboss.logging:jboss-logging:3.4.3.Final -> 3.6.1.Final
+|         \--- com.fasterxml:classmate:1.5.1 -> 1.7.1
++--- org.springframework.boot:spring-boot-starter-data-jpa -> 3.5.9
+|    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-starter-jdbc:3.5.9
+|    |    +--- org.springframework.boot:spring-boot-starter:3.5.9 (*)
+|    |    +--- com.zaxxer:HikariCP:6.3.3
+|    |    |    \--- org.slf4j:slf4j-api:2.0.17
+|    |    \--- org.springframework:spring-jdbc:6.2.15
+|    |         +--- org.springframework:spring-beans:6.2.15 (*)
+|    |         +--- org.springframework:spring-core:6.2.15 (*)
+|    |         \--- org.springframework:spring-tx:6.2.15
+|    |              +--- org.springframework:spring-beans:6.2.15 (*)
+|    |              \--- org.springframework:spring-core:6.2.15 (*)
+|    +--- org.hibernate.orm:hibernate-core:6.6.39.Final
+|    |    +--- jakarta.persistence:jakarta.persistence-api:3.1.0
+|    |    +--- jakarta.transaction:jakarta.transaction-api:2.0.1
+|    |    +--- org.jboss.logging:jboss-logging:3.5.0.Final -> 3.6.1.Final
+|    |    +--- org.hibernate.common:hibernate-commons-annotations:7.0.3.Final
+|    |    +--- io.smallrye:jandex:3.2.0
+|    |    +--- com.fasterxml:classmate:1.5.1 -> 1.7.1
+|    |    +--- net.bytebuddy:byte-buddy:1.15.11 -> 1.17.8
+|    |    +--- jakarta.xml.bind:jakarta.xml.bind-api:4.0.0 -> 4.0.4
+|    |    |    \--- jakarta.activation:jakarta.activation-api:2.1.4
+|    |    +--- org.glassfish.jaxb:jaxb-runtime:4.0.2 -> 4.0.6
+|    |    |    \--- org.glassfish.jaxb:jaxb-core:4.0.6
+|    |    |         +--- jakarta.xml.bind:jakarta.xml.bind-api:4.0.4 (*)
+|    |    |         +--- jakarta.activation:jakarta.activation-api:2.1.4
+|    |    |         +--- org.eclipse.angus:angus-activation:2.0.3 (*)
+|    |    |         +--- org.glassfish.jaxb:txw2:4.0.6
+|    |    |         \--- com.sun.istack:istack-commons-runtime:4.1.2
+|    |    +--- jakarta.inject:jakarta.inject-api:2.0.1
+|    |    \--- org.antlr:antlr4-runtime:4.13.0
+|    +--- org.springframework.data:spring-data-jpa:3.5.7
+|    |    +--- org.springframework.data:spring-data-commons:3.5.7
+|    |    |    +--- org.springframework:spring-core:6.2.15 (*)
+|    |    |    +--- org.springframework:spring-beans:6.2.15 (*)
+|    |    |    \--- org.slf4j:slf4j-api:2.0.17
+|    |    +--- org.springframework:spring-orm:6.2.15
+|    |    |    +--- org.springframework:spring-beans:6.2.15 (*)
+|    |    |    +--- org.springframework:spring-core:6.2.15 (*)
+|    |    |    +--- org.springframework:spring-jdbc:6.2.15 (*)
+|    |    |    \--- org.springframework:spring-tx:6.2.15 (*)
+|    |    +--- org.springframework:spring-context:6.2.15 (*)
+|    |    +--- org.springframework:spring-aop:6.2.15 (*)
+|    |    +--- org.springframework:spring-tx:6.2.15 (*)
+|    |    +--- org.springframework:spring-beans:6.2.15 (*)
+|    |    +--- org.springframework:spring-core:6.2.15 (*)
+|    |    +--- org.antlr:antlr4-runtime:4.13.0
+|    |    +--- jakarta.annotation:jakarta.annotation-api:2.0.0 -> 2.1.1
+|    |    \--- org.slf4j:slf4j-api:2.0.17
+|    \--- org.springframework:spring-aspects:6.2.15
+|         \--- org.aspectj:aspectjweaver:1.9.22.1 -> 1.9.25.1
++--- org.hibernate.orm:hibernate-envers -> 6.6.39.Final
+|    +--- org.hibernate.orm:hibernate-core:6.6.39.Final (*)
+|    +--- org.jboss.logging:jboss-logging:3.5.0.Final -> 3.6.1.Final
+|    +--- jakarta.xml.bind:jakarta.xml.bind-api:4.0.0 -> 4.0.4 (*)
+|    +--- org.glassfish.jaxb:jaxb-runtime:4.0.2 -> 4.0.6 (*)
+|    +--- org.hibernate.common:hibernate-commons-annotations:7.0.3.Final
+|    \--- io.smallrye:jandex:3.2.0
++--- javax.persistence:javax.persistence-api:2.2
++--- commons-io:commons-io:2.20.0
++--- org.apache.commons:commons-lang3:3.18.0
++--- org.modelmapper:modelmapper:2.4.4
++--- com.fasterxml.jackson.datatype:jackson-datatype-joda:2.12.3
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.12.3 -> 2.19.4 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.12.3 -> 2.19.4 (*)
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.12.3 -> 2.19.4 (*)
+|    \--- joda-time:joda-time:2.10.8
++--- org.springframework:spring-context-support:5.3.30 (*)
++--- javax.mail:javax.mail-api:1.6.2
++--- com.sun.mail:javax.mail:1.6.2
+|    \--- javax.activation:activation:1.1
++--- org.thymeleaf:thymeleaf:3.1.2.RELEASE
+|    +--- ognl:ognl:3.3.4
+|    |    \--- org.javassist:javassist:3.29.0-GA
+|    +--- org.attoparser:attoparser:2.0.7.RELEASE
+|    +--- org.unbescape:unbescape:1.1.6.RELEASE
+|    \--- org.slf4j:slf4j-api:2.0.7 -> 2.0.17
++--- org.thymeleaf:thymeleaf-spring5:3.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:3.1.1.RELEASE -> 3.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:2.0.5 -> 2.0.17
++--- org.apache.commons:commons-text:1.15.0
+|    \--- org.apache.commons:commons-lang3:3.20.0 -> 3.18.0
++--- com.sbi.epay:logging-service:1.0.0
+|    +--- ch.qos.logback:logback-classic:1.5.22 (*)
+|    \--- net.logstash.logback:logstash-logback-encoder:9.0
+|         \--- tools.jackson.core:jackson-databind:3.0.1
+|              +--- com.fasterxml.jackson.core:jackson-annotations:2.20 -> 2.19.4 (*)
+|              +--- tools.jackson.core:jackson-core:3.0.1
+|              |    \--- tools.jackson:jackson-bom:3.0.1
+|              |         +--- com.fasterxml.jackson.core:jackson-annotations:2.20 -> 2.19.4 (c)
+|              |         +--- tools.jackson.core:jackson-core:3.0.1 (c)
+|              |         \--- tools.jackson.core:jackson-databind:3.0.1 (c)
+|              \--- tools.jackson:jackson-bom:3.0.1 (*)
++--- com.sbi.epay:encryption-decryption-service:1.0.0
+|    +--- com.sbi.epay:logging-service:1.0.0 (*)
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    \--- net.logstash.logback:logstash-logback-encoder:7.4 -> 9.0 (*)
++--- com.sbi.epay:authentication-service:1.0.0
+|    +--- org.springframework.security:spring-security-core:6.4.4 -> 6.5.7 (*)
+|    +--- org.springframework.security:spring-security-web:6.4.4 -> 6.5.7 (*)
+|    +--- org.springframework.security:spring-security-config:6.4.4 -> 6.5.7 (*)
+|    +--- io.jsonwebtoken:jjwt-api:0.11.5
+|    +--- org.apache.commons:commons-lang3:3.12.0 -> 3.18.0
+|    +--- jakarta.servlet:jakarta.servlet-api:6.1.0 -> 6.0.0
+|    +--- com.sbi.epay:logging-service:1.0.0 (*)
+|    +--- net.logstash.logback:logstash-logback-encoder:7.4 -> 9.0 (*)
+|    +--- io.jsonwebtoken:jjwt-impl:0.11.5
+|    |    \--- io.jsonwebtoken:jjwt-api:0.11.5
+|    \--- io.jsonwebtoken:jjwt-jackson:0.11.5
+|         +--- io.jsonwebtoken:jjwt-api:0.11.5
+|         \--- com.fasterxml.jackson.core:jackson-databind:2.12.6.1 -> 2.19.4 (*)
++--- com.sbi.epay:notification-service:1.0.0
+|    +--- org.springframework:spring-webflux:6.2.1 -> 6.2.15 (*)
+|    +--- org.springframework:spring-webmvc:6.2.0 -> 6.2.15 (*)
+|    +--- org.springframework:spring-context-support:5.3.30 (*)
+|    +--- org.thymeleaf:thymeleaf:3.1.2.RELEASE (*)
+|    +--- org.thymeleaf:thymeleaf-spring5:3.1.2.RELEASE -> 3.1.1.RELEASE (*)
+|    +--- org.hibernate.validator:hibernate-validator:8.0.0.Final -> 8.0.3.Final (*)
+|    +--- javax.validation:validation-api:2.0.1.Final
+|    +--- javax.mail:javax.mail-api:1.6.2
+|    +--- com.sun.mail:javax.mail:1.6.2 (*)
+|    +--- com.google.code.gson:gson:2.10.1 -> 2.13.2
+|    |    \--- com.google.errorprone:error_prone_annotations:2.41.0
+|    +--- org.apache.commons:commons-lang3:3.12.0 -> 3.18.0
+|    +--- com.sbi.epay:logging-service:1.0.0 (*)
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.sbi.epay:captcha-service:1.1.0
+|    +--- org.springframework.boot:spring-boot-autoconfigure -> 3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-starter-data-jpa -> 3.5.9 (*)
+|    +--- org.springframework.boot:spring-boot-starter-validation -> 3.5.9 (*)
+|    +--- org.springframework:spring-webflux:6.2.15 (*)
+|    +--- com.sbi.epay:logging-service:1.0.0 (*)
+|    +--- com.sbi.epay:encryption-decryption-service:0.1.0 -> 1.0.0 (*)
+|    +--- com.jhlabs:filters:2.0.235-1
+|    +--- net.sf.sociaal:freetts:1.2.2
+|    \--- org.springframework.boot:spring-boot-dependencies:3.5.9
+|         +--- org.glassfish.jaxb:jaxb-runtime:4.0.6 (c)
+|         +--- org.glassfish.jaxb:jaxb-core:4.0.6 (c)
+|         +--- jakarta.xml.bind:jakarta.xml.bind-api:4.0.4 (c)
+|         +--- jakarta.activation:jakarta.activation-api:2.1.4 (c)
+|         +--- org.eclipse.angus:angus-activation:2.0.3 (c)
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.19.4 (c)
+|         +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (c)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (c)
+|         +--- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.19.4 (c)
+|         +--- com.fasterxml.jackson.datatype:jackson-datatype-joda:2.19.4 -> 2.12.3 (c)
+|         +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.4 (c)
+|         +--- com.fasterxml.jackson.module:jackson-module-parameter-names:2.19.4 (c)
+|         +--- io.micrometer:micrometer-commons:1.15.7 (c)
+|         +--- io.micrometer:micrometer-core:1.15.7 (c)
+|         +--- io.micrometer:micrometer-jakarta9:1.15.7 (c)
+|         +--- io.micrometer:micrometer-observation:1.15.7 (c)
+|         +--- io.projectreactor:reactor-core:3.7.14 (c)
+|         +--- io.projectreactor.netty:reactor-netty-http:1.2.13 (c)
+|         +--- org.springframework.data:spring-data-commons:3.5.7 (c)
+|         +--- org.springframework.data:spring-data-jpa:3.5.7 (c)
+|         +--- org.springframework:spring-aop:6.2.15 (c)
+|         +--- org.springframework:spring-aspects:6.2.15 (c)
+|         +--- org.springframework:spring-beans:6.2.15 (c)
+|         +--- org.springframework:spring-context:6.2.15 (c)
+|         +--- org.springframework:spring-context-support:6.2.15 -> 5.3.30 (c)
+|         +--- org.springframework:spring-core:6.2.15 (c)
+|         +--- org.springframework:spring-expression:6.2.15 (c)
+|         +--- org.springframework:spring-jcl:6.2.15 (c)
+|         +--- org.springframework:spring-jdbc:6.2.15 (c)
+|         +--- org.springframework:spring-orm:6.2.15 (c)
+|         +--- org.springframework:spring-tx:6.2.15 (c)
+|         +--- org.springframework:spring-web:6.2.15 (c)
+|         +--- org.springframework:spring-webflux:6.2.15 (c)
+|         +--- org.springframework:spring-webmvc:6.2.15 (c)
+|         +--- org.springframework.security:spring-security-config:6.5.7 (c)
+|         +--- org.springframework.security:spring-security-core:6.5.7 (c)
+|         +--- org.springframework.security:spring-security-crypto:6.5.7 (c)
+|         +--- org.springframework.security:spring-security-web:6.5.7 (c)
+|         +--- org.eclipse.angus:jakarta.mail:2.0.5 (c)
+|         +--- org.aspectj:aspectjweaver:1.9.25.1 (c)
+|         +--- net.bytebuddy:byte-buddy:1.17.8 (c)
+|         +--- com.fasterxml:classmate:1.7.1 (c)
+|         +--- commons-codec:commons-codec:1.18.0 (c)
+|         +--- org.apache.commons:commons-lang3:3.17.0 -> 3.18.0 (c)
+|         +--- com.google.code.gson:gson:2.13.2 (c)
+|         +--- com.h2database:h2:2.3.232 -> 2.4.240 (c)
+|         +--- org.hibernate.orm:hibernate-core:6.6.39.Final (c)
+|         +--- org.hibernate.orm:hibernate-envers:6.6.39.Final (c)
+|         +--- org.hibernate.validator:hibernate-validator:8.0.3.Final (c)
+|         +--- com.zaxxer:HikariCP:6.3.3 (c)
+|         +--- org.apache.httpcomponents:httpcore:4.4.16 (c)
+|         +--- jakarta.annotation:jakarta.annotation-api:2.1.1 (c)
+|         +--- jakarta.inject:jakarta.inject-api:2.0.1 (c)
+|         +--- jakarta.persistence:jakarta.persistence-api:3.1.0 (c)
+|         +--- jakarta.servlet:jakarta.servlet-api:6.0.0 (c)
+|         +--- jakarta.transaction:jakarta.transaction-api:2.0.1 (c)
+|         +--- jakarta.validation:jakarta.validation-api:3.0.2 (c)
+|         +--- org.jboss.logging:jboss-logging:3.6.1.Final (c)
+|         +--- ch.qos.logback:logback-classic:1.5.22 (c)
+|         +--- ch.qos.logback:logback-core:1.5.22 (c)
+|         +--- org.springframework.boot:spring-boot:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-actuator:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-actuator-autoconfigure:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-actuator:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-aop:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-data-jpa:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-jdbc:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-json:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-mail:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-reactor-netty:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-security:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-tomcat:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-validation:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-web:3.5.9 (c)
+|         +--- org.springframework.boot:spring-boot-starter-webflux:3.5.9 (c)
+|         +--- org.slf4j:jcl-over-slf4j:2.0.17 (c)
+|         +--- org.slf4j:slf4j-api:2.0.17 (c)
+|         +--- org.yaml:snakeyaml:2.4 (c)
+|         +--- org.springframework.retry:spring-retry:2.0.12 (c)
+|         +--- org.thymeleaf:thymeleaf:3.1.3.RELEASE -> 3.1.2.RELEASE (c)
+|         +--- org.apache.tomcat.embed:tomcat-embed-core:10.1.50 (c)
+|         +--- org.apache.tomcat.embed:tomcat-embed-el:10.1.50 (c)
+|         +--- org.apache.tomcat.embed:tomcat-embed-websocket:10.1.50 (c)
+|         +--- org.webjars:webjars-locator-lite:1.1.2 (c)
+|         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.25 (c)
+|         +--- org.reactivestreams:reactive-streams:1.0.4 (c)
+|         +--- io.netty:netty-codec-http:4.1.130.Final (c)
+|         +--- io.netty:netty-codec-http2:4.1.130.Final (c)
+|         +--- io.netty:netty-codec:4.1.130.Final (c)
+|         +--- io.netty:netty-transport:4.1.130.Final (c)
+|         +--- io.netty:netty-common:4.1.130.Final (c)
+|         +--- io.netty:netty-buffer:4.1.130.Final (c)
+|         +--- io.netty:netty-handler:4.1.130.Final (c)
+|         +--- io.netty:netty-transport-classes-epoll:4.1.130.Final (c)
+|         +--- io.netty:netty-resolver:4.1.130.Final (c)
+|         +--- org.jspecify:jspecify:1.0.0 (c)
+|         +--- org.apache.logging.log4j:log4j-to-slf4j:2.24.3 (c)
+|         +--- org.slf4j:jul-to-slf4j:2.0.17 (c)
+|         +--- io.netty:netty-resolver-dns:4.1.130.Final (c)
+|         +--- io.netty:netty-resolver-dns-native-macos:4.1.130.Final (c)
+|         +--- io.netty:netty-transport-native-epoll:4.1.130.Final (c)
+|         +--- io.projectreactor.netty:reactor-netty-core:1.2.13 (c)
+|         +--- org.glassfish.jaxb:txw2:4.0.6 (c)
+|         +--- com.sun.istack:istack-commons-runtime:4.1.2 (c)
+|         +--- org.jetbrains.kotlin:kotlin-stdlib:1.9.25 (c)
+|         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.25 (c)
+|         +--- io.netty:netty-transport-native-unix-common:4.1.130.Final (c)
+|         +--- org.apache.logging.log4j:log4j-api:2.24.3 (c)
+|         +--- io.netty:netty-codec-dns:4.1.130.Final (c)
+|         +--- io.netty:netty-resolver-dns-classes-macos:4.1.130.Final (c)
+|         +--- io.netty:netty-handler-proxy:4.1.130.Final (c)
+|         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.25 (c)
+|         +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.4 (c)
+|         \--- io.netty:netty-codec-socks:4.1.130.Final (c)
++--- com.jhlabs:filters:2.0.235-1
++--- net.sf.sociaal:freetts:1.2.2
++--- in.bank.sbi.sbiepay:sbiepay_java_sdk:1.2.0
+|    +--- commons-codec:commons-codec:1.13 -> 1.18.0
+|    +--- org.apache.commons:commons-text:1.15.0 (*)
+|    +--- com.fasterxml.jackson.datatype:jackson-datatype-joda:2.12.3 (*)
+|    +--- com.squareup.okhttp3:okhttp:4.12.0
+|    |    +--- com.squareup.okio:okio:3.6.0
+|    |    |    \--- com.squareup.okio:okio-jvm:3.6.0
+|    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10 -> 1.9.25
+|    |    |         |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.9.25
+|    |    |         |    |    +--- org.jetbrains:annotations:13.0
+|    |    |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.25 (c)
+|    |    |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0 -> 1.9.25 (c)
+|    |    |         |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0 -> 1.9.25 (c)
+|    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.25
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.9.25 (*)
+|    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.10 -> 1.9.25
+|    |    |              \--- org.jetbrains.kotlin:kotlin-stdlib:1.9.25 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 -> 1.9.25 (*)
+|    +--- com.squareup.okhttp3:logging-interceptor:4.9.3
+|    |    +--- com.squareup.okhttp3:okhttp:4.9.3 -> 4.12.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10 -> 1.9.25 (*)
+|    +--- org.slf4j:slf4j-api:1.7.25 -> 2.0.17
+|    +--- ch.qos.logback:logback-classic:1.3.15 -> 1.5.22 (*)
+|    +--- org.json:json:20240303
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.15.2 -> 2.19.4 (*)
++--- software.amazon.awssdk:s3:2.30.2
+|    +--- software.amazon.awssdk:aws-xml-protocol:2.30.2
+|    |    +--- software.amazon.awssdk:aws-query-protocol:2.30.2
+|    |    |    +--- software.amazon.awssdk:protocol-core:2.30.2
+|    |    |    |    +--- software.amazon.awssdk:sdk-core:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2
+|    |    |    |    |    |    |    +--- org.reactivestreams:reactive-streams:1.0.4
+|    |    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.36 -> 2.0.17
+|    |    |    |    |    |    +--- software.amazon.awssdk:metrics-spi:2.30.2
+|    |    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    \--- org.reactivestreams:reactive-streams:1.0.4
+|    |    |    |    |    +--- software.amazon.awssdk:metrics-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:endpoints-spi:2.30.2
+|    |    |    |    |    |    \--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth-spi:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- org.reactivestreams:reactive-streams:1.0.4
+|    |    |    |    |    |    \--- software.amazon.awssdk:identity-spi:2.30.2
+|    |    |    |    |    |         +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |         \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth-aws:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:http-auth-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:checksums-spi:2.30.2
+|    |    |    |    |    |    |    \--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    \--- software.amazon.awssdk:checksums:2.30.2
+|    |    |    |    |    |         +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |         +--- software.amazon.awssdk:checksums-spi:2.30.2 (*)
+|    |    |    |    |    |         \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:checksums-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:checksums:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:profiles:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    \--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:retries-spi:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:retries:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:retries-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.36 -> 2.0.17
+|    |    |    |    |    \--- org.reactivestreams:reactive-streams:1.0.4
+|    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    \--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    +--- software.amazon.awssdk:aws-core:2.30.2
+|    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    +--- software.amazon.awssdk:regions:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:profiles:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:json-utils:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    \--- software.amazon.awssdk:third-party-jackson-core:2.30.2
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.36 -> 2.0.17
+|    |    |    |    +--- software.amazon.awssdk:auth:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:regions:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:profiles:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:json-utils:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth-aws:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth-aws-eventstream:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    \--- software.amazon.eventstream:eventstream:1.0.1
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    |    |    |    +--- software.amazon.awssdk:http-auth-spi:2.30.2 (*)
+|    |    |    |    |    |    \--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    |    |    |    |    +--- software.amazon.awssdk:http-auth-spi:2.30.2 (*)
+|    |    |    |    |    \--- software.amazon.eventstream:eventstream:1.0.1
+|    |    |    |    +--- software.amazon.awssdk:http-auth-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:http-auth:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:profiles:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:metrics-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:endpoints-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:retries-spi:2.30.2 (*)
+|    |    |    |    +--- software.amazon.awssdk:retries:2.30.2 (*)
+|    |    |    |    \--- software.amazon.eventstream:eventstream:1.0.1
+|    |    |    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    |    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:protocol-core:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:aws-core:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    +--- software.amazon.awssdk:protocol-core:2.30.2 (*)
+|    +--- software.amazon.awssdk:arns:2.30.2
+|    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    +--- software.amazon.awssdk:profiles:2.30.2 (*)
+|    +--- software.amazon.awssdk:crt-core:2.30.2
+|    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    \--- software.amazon.awssdk:utils:2.30.2 (*)
+|    +--- software.amazon.awssdk:http-auth:2.30.2 (*)
+|    +--- software.amazon.awssdk:identity-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:http-auth-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:http-auth-aws:2.30.2 (*)
+|    +--- software.amazon.awssdk:checksums:2.30.2 (*)
+|    +--- software.amazon.awssdk:checksums-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:retries-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:sdk-core:2.30.2 (*)
+|    +--- software.amazon.awssdk:auth:2.30.2 (*)
+|    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:regions:2.30.2 (*)
+|    +--- software.amazon.awssdk:annotations:2.30.2
+|    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    +--- software.amazon.awssdk:aws-core:2.30.2 (*)
+|    +--- software.amazon.awssdk:metrics-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:json-utils:2.30.2 (*)
+|    +--- software.amazon.awssdk:endpoints-spi:2.30.2 (*)
+|    +--- software.amazon.awssdk:apache-client:2.30.2
+|    |    +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:metrics-spi:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:utils:2.30.2 (*)
+|    |    +--- software.amazon.awssdk:annotations:2.30.2
+|    |    +--- org.apache.httpcomponents:httpclient:4.5.13
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.4.13 -> 4.4.16
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- commons-codec:commons-codec:1.11 -> 1.18.0
+|    |    +--- org.apache.httpcomponents:httpcore:4.4.16
+|    |    \--- commons-codec:commons-codec:1.17.1 -> 1.18.0
+|    \--- software.amazon.awssdk:netty-nio-client:2.30.2
+|         +--- software.amazon.awssdk:annotations:2.30.2
+|         +--- software.amazon.awssdk:http-client-spi:2.30.2 (*)
+|         +--- software.amazon.awssdk:utils:2.30.2 (*)
+|         +--- software.amazon.awssdk:metrics-spi:2.30.2 (*)
+|         +--- io.netty:netty-codec-http:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-codec-http2:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-codec:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-transport:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-common:4.1.115.Final -> 4.1.130.Final
+|         +--- io.netty:netty-buffer:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-handler:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-transport-classes-epoll:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- io.netty:netty-resolver:4.1.115.Final -> 4.1.130.Final (*)
+|         +--- org.reactivestreams:reactive-streams:1.0.4
+|         \--- org.slf4j:slf4j-api:1.7.36 -> 2.0.17
++--- software.amazon.awssdk:auth:2.30.2 (*)
++--- software.amazon.awssdk:apache-client:2.30.2 (*)
++--- org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13
+|    +--- org.springdoc:springdoc-openapi-starter-webmvc-api:2.8.13
+|    |    +--- org.springdoc:springdoc-openapi-starter-common:2.8.13
+|    |    |    +--- org.springframework.boot:spring-boot-autoconfigure:3.5.5 -> 3.5.9 (*)
+|    |    |    +--- org.springframework.boot:spring-boot-starter-validation:3.5.5 -> 3.5.9 (*)
+|    |    |    \--- io.swagger.core.v3:swagger-core-jakarta:2.2.36
+|    |    |         +--- org.apache.commons:commons-lang3:3.18.0
+|    |    |         +--- org.slf4j:slf4j-api:2.0.9 -> 2.0.17
+|    |    |         +--- io.swagger.core.v3:swagger-annotations-jakarta:2.2.36
+|    |    |         +--- io.swagger.core.v3:swagger-models-jakarta:2.2.36
+|    |    |         |    \--- com.fasterxml.jackson.core:jackson-annotations:2.19.2 -> 2.19.4 (*)
+|    |    |         +--- org.yaml:snakeyaml:2.3 -> 2.4
+|    |    |         +--- jakarta.xml.bind:jakarta.xml.bind-api:3.0.1 -> 4.0.4 (*)
+|    |    |         +--- jakarta.validation:jakarta.validation-api:3.0.2
+|    |    |         +--- com.fasterxml.jackson.core:jackson-annotations:2.19.2 -> 2.19.4 (*)
+|    |    |         +--- com.fasterxml.jackson.core:jackson-databind:2.19.2 -> 2.19.4 (*)
+|    |    |         +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.2 -> 2.19.4
+|    |    |         |    +--- com.fasterxml.jackson.core:jackson-databind:2.19.4 (*)
+|    |    |         |    +--- org.yaml:snakeyaml:2.4
+|    |    |         |    +--- com.fasterxml.jackson.core:jackson-core:2.19.4 (*)
+|    |    |         |    \--- com.fasterxml.jackson:jackson-bom:2.19.4 (*)
+|    |    |         \--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2 -> 2.19.4 (*)
+|    |    \--- org.springframework:spring-webmvc:6.2.10 -> 6.2.15 (*)
+|    +--- org.webjars:swagger-ui:5.28.1
+|    \--- org.webjars:webjars-locator-lite:1.1.0 -> 1.1.2
+|         \--- org.jspecify:jspecify:1.0.0
++--- io.jsonwebtoken:jjwt-api:0.11.5
++--- com.jcraft:jsch:0.1.55
++--- org.apache.sshd:sshd-core:2.12.0
+|    +--- org.apache.sshd:sshd-common:2.12.0
+|    |    +--- org.slf4j:slf4j-api:1.7.32 -> 2.0.17
+|    |    \--- org.slf4j:jcl-over-slf4j:1.7.32 -> 2.0.17
+|    |         \--- org.slf4j:slf4j-api:2.0.17
+|    +--- org.slf4j:slf4j-api:1.7.32 -> 2.0.17
+|    \--- org.slf4j:jcl-over-slf4j:1.7.32 -> 2.0.17 (*)
++--- org.apache.sshd:sshd-sftp:2.12.0
+|    +--- org.apache.sshd:sshd-core:2.12.0 (*)
+|    +--- org.slf4j:slf4j-api:1.7.32 -> 2.0.17
+|    \--- org.slf4j:jcl-over-slf4j:1.7.32 -> 2.0.17 (*)
++--- org.springframework.retry:spring-retry -> 2.0.12
++--- com.h2database:h2:2.4.240
++--- io.jsonwebtoken:jjwt-jackson:0.11.5 (*)
+\--- io.jsonwebtoken:jjwt-impl:0.11.5 (*)
+(c) - A dependency constraint, not a dependency. The dependency affected by the constraint occurs elsewhere in the tree.
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+A web-based, searchable dependency report is available by adding the --scan option.
+[Incubating] Problems report is available at: file:///builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/build/reports/problems/problems-report.html
+BUILD SUCCESSFUL in 24s
+1 actionable task: 1 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
+Building VERSION: mr-feature-epay-038-decryption-consent-reve-develop-75-3d52c9f6
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/cacerts-custom -Djavax.net.ssl.trustStorePassword=changeit
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean
+> Task :bootBuildInfo
+> Task :compileJava
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:22: error: cannot find symbol
+import static com.neo.client.project.util.ErrorConstants.INVALID_VERSION_ERROR_MESSAGE;
+^
+  symbol:   static INVALID_VERSION_ERROR_MESSAGE
+  location: class ErrorConstants
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/config/SdkConfig.java:46: error: constructor EPaySDKException in class EPaySDKException cannot be applied to given types;
+            throw new EPaySDKException(e.getMessage());
+                  ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:37: error: cannot find symbol
+        log.info("Received request for generateCaptcha");
+        ^
+  symbol:   variable log
+  location: class CaptchaController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:38: error: cannot find symbol
+        var captchaDto = captchaService.generateCaptcha(captchaRequest.getRequestId(), captchaRequest.getRequestType());
+                                                                      ^
+  symbol:   method getRequestId()
+  location: variable captchaRequest of type @jakarta.validation.Valid CaptchaGenerateRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:38: error: cannot find symbol
+        var captchaDto = captchaService.generateCaptcha(captchaRequest.getRequestId(), captchaRequest.getRequestType());
+                                                                                                     ^
+  symbol:   method getRequestType()
+  location: variable captchaRequest of type @jakarta.validation.Valid CaptchaGenerateRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:44: error: cannot find symbol
+        log.info("Received request for getAllCaptcha");
+        ^
+  symbol:   variable log
+  location: class CaptchaController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:50: error: cannot find symbol
+        log.info("Received request for captcha validate.");
+        ^
+  symbol:   variable log
+  location: class CaptchaController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+        Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                 ^
+  symbol:   method getRequestId()
+  location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+        Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                                         ^
+  symbol:   method getRequestType()
+  location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+        Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                                                                   ^
+  symbol:   method getCaptchaHash()
+  location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:52: error: cannot find symbol
+        return ResponseDto.<Map<String, Boolean>>builder().status(1).data(List.of(response)).build();
+                          ^
+  symbol:   method <Map<String,Boolean>>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/ConsentCryptoController.java:27: error: cannot find symbol
+        return DCMSEISEncryptionDecryptionUtil.decrypt(decryptConsentPayloadRequest.getPayload(), decryptConsentPayloadRequest.getAesKey());
+                                                                                   ^
+  symbol:   method getPayload()
+  location: variable decryptConsentPayloadRequest of type DecryptConsentPayloadRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/ConsentCryptoController.java:27: error: cannot find symbol
+        return DCMSEISEncryptionDecryptionUtil.decrypt(decryptConsentPayloadRequest.getPayload(), decryptConsentPayloadRequest.getAesKey());
+                                                                                                                              ^
+  symbol:   method getAesKey()
+  location: variable decryptConsentPayloadRequest of type DecryptConsentPayloadRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:38: error: cannot find symbol
+                 if(StringUtils.isBlank(consentPrivacyNoticeRequest.getVersion()) || !consentPrivacyNoticeRequest.getVersion().matches("\\d{1,17}(\\.\\d{1,3})?$")){
+                                                                   ^
+  symbol:   method getVersion()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:38: error: cannot find symbol
+                 if(StringUtils.isBlank(consentPrivacyNoticeRequest.getVersion()) || !consentPrivacyNoticeRequest.getVersion().matches("\\d{1,17}(\\.\\d{1,3})?$")){
+                                                                                                                 ^
+  symbol:   method getVersion()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:39: error: cannot find symbol
+                throw new BaseException(ErrorConstants.INVALID_ERROR_CODE, INVALID_VERSION_ERROR_MESSAGE);
+                                                                           ^
+  symbol:   variable INVALID_VERSION_ERROR_MESSAGE
+  location: class ConsentCryptoService
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:42: error: cannot find symbol
+        PublicKey publicKey = DCMSEISEncryptionDecryptionUtil.getEISPublicKey(simulatorConfig.getEisPublicKeyPath());
+                                                                                             ^
+  symbol:   method getEisPublicKeyPath()
+  location: variable simulatorConfig of type SimulatorConfig
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+        return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                   ^
+  symbol:   method builder()
+  location: class ConsentTokenResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+        return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                                                                                                                       ^
+  symbol:   method getDigiSignData()
+  location: variable consentTokenResponse of type ConsentTokenResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+        return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                                                                                                                                                                                       ^
+  symbol:   method getEncryptedPrivacyRequest()
+  location: variable consentTokenResponse of type ConsentTokenResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:63: error: cannot find symbol
+            String digitalSignature = DCMSEISEncryptionDecryptionUtil.signSHA256RSA(request, simulatorConfig.getEisPrivateKeyPath());
+                                                                                                            ^
+  symbol:   method getEisPrivateKeyPath()
+  location: variable simulatorConfig of type SimulatorConfig
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:64: error: cannot find symbol
+            return ConsentTokenResponse.builder().encryptedPrivacyRequest(encryptedPayload).digiSignData(digitalSignature).build();
+                                       ^
+  symbol:   method builder()
+  location: class ConsentTokenResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:67: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(JSON_ERROR_CODE, MessageFormat.format(JSON_ERROR_MESSAGE, PRIVACY_NOTICE_REQUEST));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:81: error: cannot find symbol
+        return ConsentPrivacyNoticeRequest.builder().touchPointId(consentPrivacyNoticeRequest.getTouchPointId())
+                                          ^
+  symbol:   method builder()
+  location: class ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:81: error: cannot find symbol
+        return ConsentPrivacyNoticeRequest.builder().touchPointId(consentPrivacyNoticeRequest.getTouchPointId())
+                                                                                             ^
+  symbol:   method getTouchPointId()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:82: error: cannot find symbol
+                .privacyNotice(consentPrivacyNoticeRequest.getPrivacyNotice())
+                                                          ^
+  symbol:   method getPrivacyNotice()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:83: error: cannot find symbol
+                .locale(consentPrivacyNoticeRequest.getLocale())
+                                                   ^
+  symbol:   method getLocale()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:84: error: cannot find symbol
+                .requestReferenceNumber(consentPrivacyNoticeRequest.getRequestReferenceNumber())
+                                                                   ^
+  symbol:   method getRequestReferenceNumber()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:85: error: cannot find symbol
+                .version(consentPrivacyNoticeRequest.getVersion())
+                                                    ^
+  symbol:   method getVersion()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:86: error: cannot find symbol
+                .timestamp(consentPrivacyNoticeRequest.getTimestamp())
+                                                      ^
+  symbol:   method getTimestamp()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:87: error: cannot find symbol
+                .correlationId(consentPrivacyNoticeRequest.getCorrelationId()).build();
+                                                          ^
+  symbol:   method getCorrelationId()
+  location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:27: error: cannot find symbol
+        log.info("Received request for Encryption {}", requestData);
+        ^
+  symbol:   variable log
+  location: class CryptoController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:33: error: cannot find symbol
+        log.info("Received request for Decryption {}", requestData);
+        ^
+  symbol:   variable log
+  location: class CryptoController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:39: error: cannot find symbol
+        log.info("Received request for Hashing {}", apiRequestBody);
+        ^
+  symbol:   variable log
+  location: class CryptoController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:40: error: cannot find symbol
+        return cryptoService.generateHash(apiRequestBody.getInput());
+                                                        ^
+  symbol:   method getInput()
+  location: variable apiRequestBody of type @jakarta.validation.Valid APIRequestBody
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:45: error: cannot find symbol
+        log.info("Push verification Decrypt Response: {}", pushVerificationRequest);
+        ^
+  symbol:   variable log
+  location: class CryptoController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:30: error: cannot find symbol
+        String request = objectMapper.writeValueAsString(requestData.getEncryptRequest());
+                                                                    ^
+  symbol:   method getEncryptRequest()
+  location: variable requestData of type EncryptRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:34: error: cannot find symbol
+        return EncryptionService.encryptValueBySecretKey(decodedValue(requestData.getKey()), request, EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                 ^
+  symbol:   method getKey()
+  location: variable requestData of type EncryptRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:38: error: cannot find symbol
+        return DecryptionService.decryptValueBySecretKey(decodedValue(requestData.getKey()), requestData.getDecryptRequest(), EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                 ^
+  symbol:   method getKey()
+  location: variable requestData of type DecryptRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:38: error: cannot find symbol
+        return DecryptionService.decryptValueBySecretKey(decodedValue(requestData.getKey()), requestData.getDecryptRequest(), EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                                        ^
+  symbol:   method getDecryptRequest()
+  location: variable requestData of type DecryptRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:43: error: cannot find symbol
+        return HashResponse.builder().hash(Base64.getEncoder().encodeToString(bytes)).build();
+                           ^
+  symbol:   method builder()
+  location: class HashResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/EISConsentController.java:23: error: cannot find symbol
+        log.info("Received request for Encryption {}", requestData);
+        ^
+  symbol:   variable log
+  location: class EISConsentController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/EISConsentController.java:24: error: cannot find symbol
+        log.info("accessToken : {}", accessToken);
+        ^
+  symbol:   variable log
+  location: class EISConsentController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:64: error: cannot find symbol
+            log.info("Error while getting RSA Private Key {} "+e);
+            ^
+  symbol:   variable log
+  location: class SimulatorUtil
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:65: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(JSON_ERROR_CODE, MessageFormat.format(JSON_ERROR_MESSAGE, PRIVACY_NOTICE_REQUEST));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:71: error: cannot find symbol
+        log.info("Generating RandomKey");
+        ^
+  symbol:   variable log
+  location: class SimulatorUtil
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:86: error: constructor BaseException in class BaseException cannot be applied to given types;
+                throw new BaseException("2011", MessageFormat.format("Failed to decrypt AES key", "AES key"));
+                      ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:89: error: cannot find symbol
+            log.info("Error while decrypting AES key", e.getMessage());
+            ^
+  symbol:   variable log
+  location: class SimulatorUtil
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:90: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException("2011", MessageFormat.format("Failed to decrypt AES key", "AES key"));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:123: error: cannot find symbol
+                log.warn("Strong instance not available. Falling back to default SecureRandom, error: {}", e.getMessage());
+                ^
+  symbol:   variable log
+  location: class SimulatorUtil
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:136: error: cannot find symbol
+            log.error("Issue in Loading EIS Certificate file, {}", e.getMessage());
+            ^
+  symbol:   variable log
+  location: class SimulatorUtil
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:137: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(BaseConstants.INVALID_ERROR_CODE, MessageFormat.format(BaseConstants.INVALID_ERROR_MESSAGE, "EIS Certificate File", "File Not found or Issue in Certification Creation"));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:29: error: cannot find symbol
+        PrivateKey pprivateKey = simulatorUtil.loadPrivateKey(simulatorConfig.getEisPrivateKeyPath());
+                                                                             ^
+  symbol:   method getEisPrivateKeyPath()
+  location: variable simulatorConfig of type SimulatorConfig
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:32: error: cannot find symbol
+        log.info("Decrypted AESKey:  {}", decryptedAESkey);
+        ^
+  symbol:   variable log
+  location: class EISConsentService
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:34: error: cannot find symbol
+        String decrypted = DCMSEISEncryptionDecryptionUtil.decrypt(requestData.getRequest(), decryptedAESkey);
+                                                                              ^
+  symbol:   method getRequest()
+  location: variable requestData of type ConsentRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:35: error: cannot find symbol
+        log.info("decrypted Payload:   {}", decrypted);
+        ^
+  symbol:   variable log
+  location: class EISConsentService
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:46: error: cannot find symbol
+            log.info("encryptedResponse:   {}", encryptedvalue);
+            ^
+  symbol:   variable log
+  location: class EISConsentService
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:49: error: cannot find symbol
+            consentResponse.setEncryptedResponse(encryptedvalue);
+                           ^
+  symbol:   method setEncryptedResponse(String)
+  location: variable consentResponse of type ConsentResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:50: error: cannot find symbol
+            consentResponse.setRequestReferenceNumber(requestData.getRequestReferenceNumber());
+                                                                 ^
+  symbol:   method getRequestReferenceNumber()
+  location: variable requestData of type ConsentRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:51: error: cannot find symbol
+            consentResponse.setDigiSign(requestData.getDigiSign());
+                                                   ^
+  symbol:   method getDigiSign()
+  location: variable requestData of type ConsentRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:52: error: cannot find symbol
+            consentResponse.setRequestDate(LocalDateTime.now().toString());
+                           ^
+  symbol:   method setRequestDate(String)
+  location: variable consentResponse of type ConsentResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:57: error: cannot find symbol
+            log.info("Final ConsentResponse:   {}", finalJson);
+            ^
+  symbol:   variable log
+  location: class EISConsentService
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/LoginController.java:26: error: cannot find symbol
+        log.info("Received request for login {}", accessTokenRequest);
+        ^
+  symbol:   variable log
+  location: class LoginController
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:36: error: constructor LoginResponse in class LoginResponse cannot be applied to given types;
+        LoginResponse loginResponse = new LoginResponse(authenticationService.generateAccessToken(accessTokenRequest));
+                                      ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:37: error: cannot find symbol
+        return ResponseDto.<LoginResponse>builder().status(0).data(List.of(loginResponse)).build();
+                          ^
+  symbol:   method <LoginResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:42: error: constructor LoginResponse in class LoginResponse cannot be applied to given types;
+        LoginResponse loginResponse = new LoginResponse(ePayPrincipal.getMId());
+                                      ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:43: error: cannot find symbol
+        return ResponseDto.<LoginResponse>builder().status(0).data(List.of(loginResponse)).build();
+                          ^
+  symbol:   method <LoginResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/NotificationService.java:22: error: cannot find symbol
+        return ResponseDto.<NotificationResponse>builder().build();
+                          ^
+  symbol:   method <NotificationResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/NotificationService.java:27: error: cannot find symbol
+        return ResponseDto.<NotificationResponse>builder().build();
+                          ^
+  symbol:   method <NotificationResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:32: error: cannot find symbol
+                return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                  ^
+  symbol:   method <RBIMalwareUploadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:32: error: cannot find symbol
+                return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                                                                                        ^
+  symbol:   method builder()
+  location: class ErrorDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:45: error: cannot find symbol
+            return ResponseDto.<RBIMalwareUploadResponse>builder().status(1).data(List.of(RBIMalwareUploadResponse.builder().fileName(newFilename).build())).build();
+                              ^
+  symbol:   method <RBIMalwareUploadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:45: error: cannot find symbol
+            return ResponseDto.<RBIMalwareUploadResponse>builder().status(1).data(List.of(RBIMalwareUploadResponse.builder().fileName(newFilename).build())).build();
+                                                                                                                  ^
+  symbol:   method builder()
+  location: class RBIMalwareUploadResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:47: error: cannot find symbol
+            return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_UPLOAD_FAILED_ERROR_CODE).errorMessage(FILE_UPLOAD_FAILED_MESSAGE).build())).build();
+                              ^
+  symbol:   method <RBIMalwareUploadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:47: error: cannot find symbol
+            return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_UPLOAD_FAILED_ERROR_CODE).errorMessage(FILE_UPLOAD_FAILED_MESSAGE).build())).build();
+                                                                                                    ^
+  symbol:   method builder()
+  location: class ErrorDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:53: error: cannot find symbol
+            Path filePath = Paths.get(UPLOAD_DIR + "/" + downloadRequest.getMId(), downloadRequest.getFileName());
+                                                                        ^
+  symbol:   method getMId()
+  location: variable downloadRequest of type RBIMalwareDownloadRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:53: error: cannot find symbol
+            Path filePath = Paths.get(UPLOAD_DIR + "/" + downloadRequest.getMId(), downloadRequest.getFileName());
+                                                                                                  ^
+  symbol:   method getFileName()
+  location: variable downloadRequest of type RBIMalwareDownloadRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:56: error: cannot find symbol
+                return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                  ^
+  symbol:   method <RBIMalwareDownloadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:56: error: cannot find symbol
+                return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                                                                                          ^
+  symbol:   method builder()
+  location: class ErrorDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+            return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                              ^
+  symbol:   method <RBIMalwareDownloadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+            return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                                                                                                                      ^
+  symbol:   method builder()
+  location: class RBIMalwareDownloadResponse
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+            return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                                                                                                                                                                                ^
+  symbol:   method getFileName()
+  location: variable downloadRequest of type RBIMalwareDownloadRequest
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:64: error: cannot find symbol
+            return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_DOWNLOAD_FAILED_ERROR_CODE).errorMessage(MessageFormat.format(FILE_DOWNLOAD_FAILED_MESSAGE, e.getMessage())).build())).build();
+                              ^
+  symbol:   method <RBIMalwareDownloadResponse>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:64: error: cannot find symbol
+            return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_DOWNLOAD_FAILED_ERROR_CODE).errorMessage(MessageFormat.format(FILE_DOWNLOAD_FAILED_MESSAGE, e.getMessage())).build())).build();
+                                                                                                      ^
+  symbol:   method builder()
+  location: class ErrorDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/S3Controller.java:21: error: cannot find symbol
+        return ResponseDto.<String>builder().data(s3Service.uploadFile(file)).status(1).build();
+                          ^
+  symbol:   method <String>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/S3Controller.java:27: error: cannot find symbol
+        return ResponseDto.<String>builder().data(s3Service.listObjects(pageNo)).status(1).build();
+                          ^
+  symbol:   method <String>builder()
+  location: class ResponseDto
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:43: error: cannot find symbol
+            PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(s3Config.getBucket()).key(file.getName()).build();
+                                                                                       ^
+  symbol:   method getBucket()
+  location: variable s3Config of type S3Config
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:50: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:59: error: cannot find symbol
+            PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(s3Config.getBucket()).key(key).build();
+                                                                                       ^
+  symbol:   method getBucket()
+  location: variable s3Config of type S3Config
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:65: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:69: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:76: error: cannot find symbol
+            GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(s3Config.getBucket()).key(fileName).build();
+                                                                                          ^
+  symbol:   method getBucket()
+  location: variable s3Config of type S3Config
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:90: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:95: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:102: error: cannot find symbol
+            GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(s3Config.getBucket()).key(fileName).build();
+                                                                                          ^
+  symbol:   method getBucket()
+  location: variable s3Config of type S3Config
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:109: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:113: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                  ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:129: error: cannot find symbol
+                  .bucket(s3Config.getBucket())
+                                  ^
+  symbol:   method getBucket()
+  location: variable s3Config of type S3Config
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:143: error: constructor BaseException in class BaseException cannot be applied to given types;
+          throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:147: error: constructor BaseException in class BaseException cannot be applied to given types;
+          throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                ^
+  required: no arguments
+  found:    String,String
+  reason: actual and formal argument lists differ in length
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/SftpService.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+100 errors
+> Task :compileJava FAILED
+[Incubating] Problems report is available at: file:///builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/build/reports/problems/problems-report.html
+FAILURE: Build failed with an exception.
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/config/SdkConfig.java:46: error: constructor EPaySDKException in class EPaySDKException cannot be applied to given types;
+              throw new EPaySDKException(e.getMessage());
+                    ^
+    required: no arguments
+    found:    String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:67: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(JSON_ERROR_CODE, MessageFormat.format(JSON_ERROR_MESSAGE, PRIVACY_NOTICE_REQUEST));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:65: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(JSON_ERROR_CODE, MessageFormat.format(JSON_ERROR_MESSAGE, PRIVACY_NOTICE_REQUEST));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:86: error: constructor BaseException in class BaseException cannot be applied to given types;
+                  throw new BaseException("2011", MessageFormat.format("Failed to decrypt AES key", "AES key"));
+                        ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:90: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException("2011", MessageFormat.format("Failed to decrypt AES key", "AES key"));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:137: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(BaseConstants.INVALID_ERROR_CODE, MessageFormat.format(BaseConstants.INVALID_ERROR_MESSAGE, "EIS Certificate File", "File Not found or Issue in Certification Creation"));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:36: error: constructor LoginResponse in class LoginResponse cannot be applied to given types;
+          LoginResponse loginResponse = new LoginResponse(authenticationService.generateAccessToken(accessTokenRequest));
+                                        ^
+    required: no arguments
+    found:    String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:42: error: constructor LoginResponse in class LoginResponse cannot be applied to given types;
+          LoginResponse loginResponse = new LoginResponse(ePayPrincipal.getMId());
+                                        ^
+    required: no arguments
+    found:    String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:50: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:65: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:69: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:90: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:95: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:109: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:113: error: constructor BaseException in class BaseException cannot be applied to given types;
+              throw new BaseException(NOT_FOUND_ERROR_CODE, MessageFormat.format(ErrorConstants.NOT_FOUND_ERROR_MESSAGE, messageArgs));
+                    ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:143: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                  ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:147: error: constructor BaseException in class BaseException cannot be applied to given types;
+            throw new BaseException(GENERIC_ERROR_CODE, e.getMessage());
+                  ^
+    required: no arguments
+    found:    String,String
+    reason: actual and formal argument lists differ in length
+  Note: Recompile with -Xlint:deprecation for details.
+  Note: /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/SftpService.java uses unchecked or unsafe operations.
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:22: error: cannot find symbol
+  import static com.neo.client.project.util.ErrorConstants.INVALID_VERSION_ERROR_MESSAGE;
+  ^
+    symbol:   static INVALID_VERSION_ERROR_MESSAGE
+    location: class ErrorConstants
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:37: error: cannot find symbol
+          log.info("Received request for generateCaptcha");
+          ^
+    symbol:   variable log
+    location: class CaptchaController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:44: error: cannot find symbol
+          log.info("Received request for getAllCaptcha");
+          ^
+    symbol:   variable log
+    location: class CaptchaController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:50: error: cannot find symbol
+          log.info("Received request for captcha validate.");
+          ^
+    symbol:   variable log
+    location: class CaptchaController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:39: error: cannot find symbol
+                  throw new BaseException(ErrorConstants.INVALID_ERROR_CODE, INVALID_VERSION_ERROR_MESSAGE);
+                                                                             ^
+    symbol:   variable INVALID_VERSION_ERROR_MESSAGE
+    location: class ConsentCryptoService
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:27: error: cannot find symbol
+          log.info("Received request for Encryption {}", requestData);
+          ^
+    symbol:   variable log
+    location: class CryptoController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:33: error: cannot find symbol
+          log.info("Received request for Decryption {}", requestData);
+          ^
+    symbol:   variable log
+    location: class CryptoController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:39: error: cannot find symbol
+          log.info("Received request for Hashing {}", apiRequestBody);
+          ^
+    symbol:   variable log
+    location: class CryptoController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:45: error: cannot find symbol
+          log.info("Push verification Decrypt Response: {}", pushVerificationRequest);
+          ^
+    symbol:   variable log
+    location: class CryptoController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/EISConsentController.java:23: error: cannot find symbol
+          log.info("Received request for Encryption {}", requestData);
+          ^
+    symbol:   variable log
+    location: class EISConsentController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/EISConsentController.java:24: error: cannot find symbol
+          log.info("accessToken : {}", accessToken);
+          ^
+    symbol:   variable log
+    location: class EISConsentController
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:64: error: cannot find symbol
+              log.info("Error while getting RSA Private Key {} "+e);
+              ^
+    symbol:   variable log
+    location: class SimulatorUtil
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:71: error: cannot find symbol
+          log.info("Generating RandomKey");
+          ^
+    symbol:   variable log
+    location: class SimulatorUtil
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:89: error: cannot find symbol
+              log.info("Error while decrypting AES key", e.getMessage());
+              ^
+    symbol:   variable log
+    location: class SimulatorUtil
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:123: error: cannot find symbol
+                  log.warn("Strong instance not available. Falling back to default SecureRandom, error: {}", e.getMessage());
+                  ^
+    symbol:   variable log
+    location: class SimulatorUtil
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/util/SimulatorUtil.java:136: error: cannot find symbol
+              log.error("Issue in Loading EIS Certificate file, {}", e.getMessage());
+              ^
+    symbol:   variable log
+    location: class SimulatorUtil
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:32: error: cannot find symbol
+          log.info("Decrypted AESKey:  {}", decryptedAESkey);
+          ^
+    symbol:   variable log
+    location: class EISConsentService
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:35: error: cannot find symbol
+          log.info("decrypted Payload:   {}", decrypted);
+          ^
+    symbol:   variable log
+    location: class EISConsentService
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:46: error: cannot find symbol
+              log.info("encryptedResponse:   {}", encryptedvalue);
+              ^
+    symbol:   variable log
+    location: class EISConsentService
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:57: error: cannot find symbol
+              log.info("Final ConsentResponse:   {}", finalJson);
+              ^
+    symbol:   variable log
+    location: class EISConsentService
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/LoginController.java:26: error: cannot find symbol
+          log.info("Received request for login {}", accessTokenRequest);
+          ^
+    symbol:   variable log
+    location: class LoginController
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:52: error: cannot find symbol
+          return ResponseDto.<Map<String, Boolean>>builder().status(1).data(List.of(response)).build();
+                            ^
+    symbol:   method <Map<String,Boolean>>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:37: error: cannot find symbol
+          return ResponseDto.<LoginResponse>builder().status(0).data(List.of(loginResponse)).build();
+                            ^
+    symbol:   method <LoginResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/LoginService.java:43: error: cannot find symbol
+          return ResponseDto.<LoginResponse>builder().status(0).data(List.of(loginResponse)).build();
+                            ^
+    symbol:   method <LoginResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/NotificationService.java:22: error: cannot find symbol
+          return ResponseDto.<NotificationResponse>builder().build();
+                            ^
+    symbol:   method <NotificationResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/NotificationService.java:27: error: cannot find symbol
+          return ResponseDto.<NotificationResponse>builder().build();
+                            ^
+    symbol:   method <NotificationResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:32: error: cannot find symbol
+                  return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                    ^
+    symbol:   method <RBIMalwareUploadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:45: error: cannot find symbol
+              return ResponseDto.<RBIMalwareUploadResponse>builder().status(1).data(List.of(RBIMalwareUploadResponse.builder().fileName(newFilename).build())).build();
+                                ^
+    symbol:   method <RBIMalwareUploadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:47: error: cannot find symbol
+              return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_UPLOAD_FAILED_ERROR_CODE).errorMessage(FILE_UPLOAD_FAILED_MESSAGE).build())).build();
+                                ^
+    symbol:   method <RBIMalwareUploadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:56: error: cannot find symbol
+                  return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                    ^
+    symbol:   method <RBIMalwareDownloadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+              return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                                ^
+    symbol:   method <RBIMalwareDownloadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:64: error: cannot find symbol
+              return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_DOWNLOAD_FAILED_ERROR_CODE).errorMessage(MessageFormat.format(FILE_DOWNLOAD_FAILED_MESSAGE, e.getMessage())).build())).build();
+                                ^
+    symbol:   method <RBIMalwareDownloadResponse>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/S3Controller.java:21: error: cannot find symbol
+          return ResponseDto.<String>builder().data(s3Service.uploadFile(file)).status(1).build();
+                            ^
+    symbol:   method <String>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/S3Controller.java:27: error: cannot find symbol
+          return ResponseDto.<String>builder().data(s3Service.listObjects(pageNo)).status(1).build();
+                            ^
+    symbol:   method <String>builder()
+    location: class ResponseDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:38: error: cannot find symbol
+          var captchaDto = captchaService.generateCaptcha(captchaRequest.getRequestId(), captchaRequest.getRequestType());
+                                                                        ^
+    symbol:   method getRequestId()
+    location: variable captchaRequest of type @jakarta.validation.Valid CaptchaGenerateRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:38: error: cannot find symbol
+          var captchaDto = captchaService.generateCaptcha(captchaRequest.getRequestId(), captchaRequest.getRequestType());
+                                                                                                       ^
+    symbol:   method getRequestType()
+    location: variable captchaRequest of type @jakarta.validation.Valid CaptchaGenerateRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+          Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                   ^
+    symbol:   method getRequestId()
+    location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+          Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                                           ^
+    symbol:   method getRequestType()
+    location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CaptchaController.java:51: error: cannot find symbol
+          Map<String, Boolean> response = Map.of("verified", captchaService.validateCaptcha(request.getRequestId(), request.getRequestType(), request.getCaptchaHash()));
+                                                                                                                                                     ^
+    symbol:   method getCaptchaHash()
+    location: variable request of type @jakarta.validation.Valid,@jakarta.validation.constraints.NotNull(message=" is required.") CaptchaValidateRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/ConsentCryptoController.java:27: error: cannot find symbol
+          return DCMSEISEncryptionDecryptionUtil.decrypt(decryptConsentPayloadRequest.getPayload(), decryptConsentPayloadRequest.getAesKey());
+                                                                                     ^
+    symbol:   method getPayload()
+    location: variable decryptConsentPayloadRequest of type DecryptConsentPayloadRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/ConsentCryptoController.java:27: error: cannot find symbol
+          return DCMSEISEncryptionDecryptionUtil.decrypt(decryptConsentPayloadRequest.getPayload(), decryptConsentPayloadRequest.getAesKey());
+                                                                                                                                ^
+    symbol:   method getAesKey()
+    location: variable decryptConsentPayloadRequest of type DecryptConsentPayloadRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:38: error: cannot find symbol
+                   if(StringUtils.isBlank(consentPrivacyNoticeRequest.getVersion()) || !consentPrivacyNoticeRequest.getVersion().matches("\\d{1,17}(\\.\\d{1,3})?$")){
+                                                                     ^
+    symbol:   method getVersion()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:38: error: cannot find symbol
+                   if(StringUtils.isBlank(consentPrivacyNoticeRequest.getVersion()) || !consentPrivacyNoticeRequest.getVersion().matches("\\d{1,17}(\\.\\d{1,3})?$")){
+                                                                                                                   ^
+    symbol:   method getVersion()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:42: error: cannot find symbol
+          PublicKey publicKey = DCMSEISEncryptionDecryptionUtil.getEISPublicKey(simulatorConfig.getEisPublicKeyPath());
+                                                                                               ^
+    symbol:   method getEisPublicKeyPath()
+    location: variable simulatorConfig of type SimulatorConfig
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+          return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                     ^
+    symbol:   method builder()
+    location: class ConsentTokenResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+          return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                                                                                                                         ^
+    symbol:   method getDigiSignData()
+    location: variable consentTokenResponse of type ConsentTokenResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:48: error: cannot find symbol
+          return ConsentTokenResponse.builder().refnum(requestReferenceNumber).accessToken(accessToken).digiSignData(consentTokenResponse.getDigiSignData()).encryptedPrivacyRequest(consentTokenResponse.getEncryptedPrivacyRequest()).aesKey(aesKey).build();
+                                                                                                                                                                                                         ^
+    symbol:   method getEncryptedPrivacyRequest()
+    location: variable consentTokenResponse of type ConsentTokenResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:63: error: cannot find symbol
+              String digitalSignature = DCMSEISEncryptionDecryptionUtil.signSHA256RSA(request, simulatorConfig.getEisPrivateKeyPath());
+                                                                                                              ^
+    symbol:   method getEisPrivateKeyPath()
+    location: variable simulatorConfig of type SimulatorConfig
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:64: error: cannot find symbol
+              return ConsentTokenResponse.builder().encryptedPrivacyRequest(encryptedPayload).digiSignData(digitalSignature).build();
+                                         ^
+    symbol:   method builder()
+    location: class ConsentTokenResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:81: error: cannot find symbol
+          return ConsentPrivacyNoticeRequest.builder().touchPointId(consentPrivacyNoticeRequest.getTouchPointId())
+                                            ^
+    symbol:   method builder()
+    location: class ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:81: error: cannot find symbol
+          return ConsentPrivacyNoticeRequest.builder().touchPointId(consentPrivacyNoticeRequest.getTouchPointId())
+                                                                                               ^
+    symbol:   method getTouchPointId()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:82: error: cannot find symbol
+                  .privacyNotice(consentPrivacyNoticeRequest.getPrivacyNotice())
+                                                            ^
+    symbol:   method getPrivacyNotice()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:83: error: cannot find symbol
+                  .locale(consentPrivacyNoticeRequest.getLocale())
+                                                     ^
+    symbol:   method getLocale()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:84: error: cannot find symbol
+                  .requestReferenceNumber(consentPrivacyNoticeRequest.getRequestReferenceNumber())
+                                                                     ^
+    symbol:   method getRequestReferenceNumber()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:85: error: cannot find symbol
+                  .version(consentPrivacyNoticeRequest.getVersion())
+                                                      ^
+    symbol:   method getVersion()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:86: error: cannot find symbol
+                  .timestamp(consentPrivacyNoticeRequest.getTimestamp())
+                                                        ^
+    symbol:   method getTimestamp()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/ConsentCryptoService.java:87: error: cannot find symbol
+                  .correlationId(consentPrivacyNoticeRequest.getCorrelationId()).build();
+                                                            ^
+    symbol:   method getCorrelationId()
+    location: variable consentPrivacyNoticeRequest of type ConsentPrivacyNoticeRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/controller/CryptoController.java:40: error: cannot find symbol
+          return cryptoService.generateHash(apiRequestBody.getInput());
+                                                          ^
+    symbol:   method getInput()
+    location: variable apiRequestBody of type @jakarta.validation.Valid APIRequestBody
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:30: error: cannot find symbol
+          String request = objectMapper.writeValueAsString(requestData.getEncryptRequest());
+                                                                      ^
+    symbol:   method getEncryptRequest()
+    location: variable requestData of type EncryptRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:34: error: cannot find symbol
+          return EncryptionService.encryptValueBySecretKey(decodedValue(requestData.getKey()), request, EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                   ^
+    symbol:   method getKey()
+    location: variable requestData of type EncryptRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:38: error: cannot find symbol
+          return DecryptionService.decryptValueBySecretKey(decodedValue(requestData.getKey()), requestData.getDecryptRequest(), EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                   ^
+    symbol:   method getKey()
+    location: variable requestData of type DecryptRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:38: error: cannot find symbol
+          return DecryptionService.decryptValueBySecretKey(decodedValue(requestData.getKey()), requestData.getDecryptRequest(), EncryptionDecryptionAlgo.AES_GCM_NO_PADDING, GCMIvLength.MAXIMUM, GCMTagLength.STANDARD);
+                                                                                                          ^
+    symbol:   method getDecryptRequest()
+    location: variable requestData of type DecryptRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/CryptoService.java:43: error: cannot find symbol
+          return HashResponse.builder().hash(Base64.getEncoder().encodeToString(bytes)).build();
+                             ^
+    symbol:   method builder()
+    location: class HashResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:29: error: cannot find symbol
+          PrivateKey pprivateKey = simulatorUtil.loadPrivateKey(simulatorConfig.getEisPrivateKeyPath());
+                                                                               ^
+    symbol:   method getEisPrivateKeyPath()
+    location: variable simulatorConfig of type SimulatorConfig
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:34: error: cannot find symbol
+          String decrypted = DCMSEISEncryptionDecryptionUtil.decrypt(requestData.getRequest(), decryptedAESkey);
+                                                                                ^
+    symbol:   method getRequest()
+    location: variable requestData of type ConsentRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:49: error: cannot find symbol
+              consentResponse.setEncryptedResponse(encryptedvalue);
+                             ^
+    symbol:   method setEncryptedResponse(String)
+    location: variable consentResponse of type ConsentResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:50: error: cannot find symbol
+              consentResponse.setRequestReferenceNumber(requestData.getRequestReferenceNumber());
+                                                                   ^
+    symbol:   method getRequestReferenceNumber()
+    location: variable requestData of type ConsentRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:51: error: cannot find symbol
+              consentResponse.setDigiSign(requestData.getDigiSign());
+                                                     ^
+    symbol:   method getDigiSign()
+    location: variable requestData of type ConsentRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/EISConsentService.java:52: error: cannot find symbol
+              consentResponse.setRequestDate(LocalDateTime.now().toString());
+                             ^
+    symbol:   method setRequestDate(String)
+    location: variable consentResponse of type ConsentResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:32: error: cannot find symbol
+                  return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                                                                                          ^
+    symbol:   method builder()
+    location: class ErrorDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:45: error: cannot find symbol
+              return ResponseDto.<RBIMalwareUploadResponse>builder().status(1).data(List.of(RBIMalwareUploadResponse.builder().fileName(newFilename).build())).build();
+                                                                                                                    ^
+    symbol:   method builder()
+    location: class RBIMalwareUploadResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:47: error: cannot find symbol
+              return ResponseDto.<RBIMalwareUploadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_UPLOAD_FAILED_ERROR_CODE).errorMessage(FILE_UPLOAD_FAILED_MESSAGE).build())).build();
+                                                                                                      ^
+    symbol:   method builder()
+    location: class ErrorDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:53: error: cannot find symbol
+              Path filePath = Paths.get(UPLOAD_DIR + "/" + downloadRequest.getMId(), downloadRequest.getFileName());
+                                                                          ^
+    symbol:   method getMId()
+    location: variable downloadRequest of type RBIMalwareDownloadRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:53: error: cannot find symbol
+              Path filePath = Paths.get(UPLOAD_DIR + "/" + downloadRequest.getMId(), downloadRequest.getFileName());
+                                                                                                    ^
+    symbol:   method getFileName()
+    location: variable downloadRequest of type RBIMalwareDownloadRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:56: error: cannot find symbol
+                  return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_NOT_FOUND_ERROR_CODE).errorMessage(FILE_NOT_FOUND_MESSAGE).build())).build();
+                                                                                                            ^
+    symbol:   method builder()
+    location: class ErrorDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+              return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                                                                                                                        ^
+    symbol:   method builder()
+    location: class RBIMalwareDownloadResponse
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:62: error: cannot find symbol
+              return ResponseDto.<RBIMalwareDownloadResponse>builder().status(1).data(List.of(RBIMalwareDownloadResponse.builder().fileContent(fileBytes).fileName(downloadRequest.getFileName()).contentType(contentType).build())).build();
+                                                                                                                                                                                  ^
+    symbol:   method getFileName()
+    location: variable downloadRequest of type RBIMalwareDownloadRequest
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/RBIMalwareService.java:64: error: cannot find symbol
+              return ResponseDto.<RBIMalwareDownloadResponse>builder().status(0).errors(List.of(ErrorDto.builder().errorCode(FILE_DOWNLOAD_FAILED_ERROR_CODE).errorMessage(MessageFormat.format(FILE_DOWNLOAD_FAILED_MESSAGE, e.getMessage())).build())).build();
+                                                                                                        ^
+    symbol:   method builder()
+    location: class ErrorDto
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:43: error: cannot find symbol
+              PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(s3Config.getBucket()).key(file.getName()).build();
+                                                                                         ^
+    symbol:   method getBucket()
+    location: variable s3Config of type S3Config
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:59: error: cannot find symbol
+              PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(s3Config.getBucket()).key(key).build();
+                                                                                         ^
+    symbol:   method getBucket()
+    location: variable s3Config of type S3Config
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:76: error: cannot find symbol
+              GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(s3Config.getBucket()).key(fileName).build();
+                                                                                            ^
+    symbol:   method getBucket()
+    location: variable s3Config of type S3Config
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:102: error: cannot find symbol
+              GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(s3Config.getBucket()).key(fileName).build();
+                                                                                            ^
+    symbol:   method getBucket()
+    location: variable s3Config of type S3Config
+  /builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator/src/main/java/com/neo/client/project/service/S3Service.java:129: error: cannot find symbol
+                    .bucket(s3Config.getBucket())
+                                    ^
+    symbol:   method getBucket()
+    location: variable s3Config of type S3Config
+  100 errors
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+3 actionable tasks: 3 executed
+BUILD FAILED in 19s
+Uploading artifacts for failed job
+00:01
+Uploading artifacts...
+WARNING: build.env: no matching files. Ensure that the artifact path is relative to the working directory (/builds/itepaypg-sbiepay2/application/merchantsimulator/java-utility-api-simulator) 
+ERROR: No files to upload                          
+Cleaning up project directory and file based variables
+00:01
+ERROR: Job failed: exit code 1
