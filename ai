@@ -1,57 +1,17 @@
-Running with gitlab-runner 19.0.2 (02fcb2d7)
-  on dc_runner_55 Wz1c0kGRX, system ID: s_300da9d7588c
-Resolving secrets
-Preparing the "docker" executor
-00:01
-Using Docker executor with image artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 ...
-Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v19.0.2 )
-Using effective pull policy of [if-not-present] for container artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2
-Using locally found image version due to "if-not-present" pull policy
-Using docker image sha256:367b33510658f246aa5bff686272dde897576eec01c436f0a0e4ce31a594815e for artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper@sha256:660e3634504b66e0ae3ad165131d9fc3fd05b2ac31ebf332b7fa8d93f4ed9682 ...
-Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v19.0.2 )
-Using effective pull policy of [if-not-present] for container artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2
-Using docker image sha256:367b33510658f246aa5bff686272dde897576eec01c436f0a0e4ce31a594815e for artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper@sha256:660e3634504b66e0ae3ad165131d9fc3fd05b2ac31ebf332b7fa8d93f4ed9682 ...
-Using effective pull policy of [if-not-present] for container artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0
-Using locally found image version due to "if-not-present" pull policy
-Using docker image sha256:db06a3e48eaa4339a92d53be57a37a699ba188fed41652c6c3c6c07bb86cb6f0 for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm@sha256:65605f26e63ed7624e4711cdd933caf6577f9d309f240d48a295f1d2c790c4d9 ...
-Preparing environment
-00:01
-Using helper image:  artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2  (overridden, default would be  registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-v19.0.2 )
-Using effective pull policy of [if-not-present] for container artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2
-Using docker image sha256:367b33510658f246aa5bff686272dde897576eec01c436f0a0e4ce31a594815e for artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper:x86_64-v19.0.2 with digest artifactory.jfrog.sbi:443/dso-base-image/gitlab/gitlab-runner-helper@sha256:660e3634504b66e0ae3ad165131d9fc3fd05b2ac31ebf332b7fa8d93f4ed9682 ...
-Using effective pull policy of [if-not-present] for container sha256:367b33510658f246aa5bff686272dde897576eec01c436f0a0e4ce31a594815e
-Running on runner-wz1c0kgrx-project-2838-concurrent-0 via PE3DSOPGrunners4...
-Getting source from Git repository
-00:16
-Gitaly correlation ID: 01KXNEHZHXDD27DA04RMW67MVJ
-Fetching changes...
-Initialized empty Git repository in /builds/itepaypg-sbiepay2/infra/devops/deployment/.git/
-Created fresh repository.
-Checking out 58ba7d6a as detached HEAD (ref is main)...
-Skipping Git submodules setup
-Executing "step_script" stage of the job script
-00:06
-Using effective pull policy of [if-not-present] for container artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0
-Using docker image sha256:db06a3e48eaa4339a92d53be57a37a699ba188fed41652c6c3c6c07bb86cb6f0 for artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm:1.0 with digest artifactory.jfrog.sbi:443/itepaypg-sbiepay2-docker-local/custom-ci/rhelgit-oc-helm@sha256:65605f26e63ed7624e4711cdd933caf6577f9d309f240d48a295f1d2c790c4d9 ...
-$ set -eo pipefail # collapsed multi-line command
-Detected SERVICE_NAME=epaybridge-key-gen-service
-Detected ENV=dev
-RAW NAMESPACE=dev-bridge
-FINAL VALUES:
-SERVICE_NAME=epaybridge-key-gen-service
-ENV=dev
-RELEASE_NAME=epaybridgekeygenservice
-NAMESPACE=dev-bridge
-Synced dev/charts/epaybridge-key-gen-service/values.yaml to origin/main
-==> Linting dev/charts/epaybridge-key-gen-service/
-[INFO] Chart.yaml: icon is recommended
-[ERROR] templates/: template: epaybridgekeygenservice/templates/deployment.yaml:17:31: executing "epaybridgekeygenservice/templates/deployment.yaml" at <include (print $.Template.BasePath "/configmap.yaml") .>: error calling include: template: epaybridgekeygenservice/templates/configmap.yaml:7:8: executing "epaybridgekeygenservice/templates/configmap.yaml" at <include "epaylite-bridge-mis-service.labels" .>: error calling include: template: no template "epaylite-bridge-mis-service.labels" associated with template "gotpl"
-Error: 1 chart(s) linted, 1 chart(s) failed
-Uploading artifacts for failed job
-00:02
-Uploading artifacts...
-build.env: found 1 matching artifact files and directories 
-Uploading artifacts as "dotenv" to coordinator... 201 Created  correlation_id=01KXNEJQGAS498SJYAPGD3473V id=1255176 status=201 token=eyJraWQiO
-Cleaning up project directory and file based variables
-00:00
-ERROR: Job failed: exit code 1
+MANOJ R
+Madam/ Dear Sir,
+
+Is end-to-end transaction status traceable from file upload to final settlement?
+Are file format, mandatory fields, file size, transaction count and data validations automatically performed?  (Code snippet)
+Whether MIS/ dashboard is available for monitoring failed and rejected transactions.
+Build, installation, configuration, and distribution process are automated wherever possible in order to reduce errors and to ensure that the process is repeatable (DevOps Team- CI/CD Evidences)
+
+
+Thanks and Regards,
+
+Shikha Gautam
+Assistant Manager (Systems)
+EPAY and PG Department,
+SBI GITC 3RD Floor, Balaji Bhawan,
+CBD Belapur, Navi Mumbai
+Phone: 7987901389
