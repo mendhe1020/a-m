@@ -87,3 +87,60 @@ Not enabled
 Run container scanning job whenever a container image with the latest tag is pushed. Learn more.
 
 Toggle Container Scanning for Registry
+
+
+
+#######################################################################################################################
+
+
+
+# ci/security/secrets/secrets.detect.yml  |  Stage: security
+# Secrets detection via JFrog CLI (jf audit --secrets).
+#
+# PREREQUISITE: requires "Advanced Security" enabled on your Xray license.
+# Ask your admin: "Is Advanced Security (secrets/SAST/IaC scanning) enabled
+# on our Xray subscription?"
+
+.secrets_detect:
+  stage: security
+  image: artifactory.jfrog.sbi:443/dso-docker-base-images/ubi9/podman-jf:9.7
+  tags:
+    - common_runner
+  variables:
+    JFROG_CLI_HOME_DIR: "${CI_PROJECT_DIR}/.jfrog"
+    JFROG_CLI_AVOID_NEW_VERSION_WARNING: "true"
+    GIT_DEPTH: "0"
+  allow_failure: true
+  before_script:
+    - |
+      set -e
+      cp "$ARTIFACTORY_CERT" /etc/pki/ca-trust/source/anchors/artifactory.crt
+      update-ca-trust extract
+      mkdir -p "${JFROG_CLI_HOME_DIR}/security/certs"
+      cp "$ARTIFACTORY_CERT" "${JFROG_CLI_HOME_DIR}/security/certs/artifactory.crt"
+      jf config add \
+        --url="$JF_URL" \
+        --access-token="$JF_TOKEN" \
+        --interactive=false \
+        epay-server
+      jf config use epay-server
+      jf rt ping
+  script:
+    - |
+      set -eo pipefail
+      jf audit --secrets --format=json --working-dirs="." > secrets-report.json || SCAN_EXIT=$?
+      cat secrets-report.json
+      if [ "${SCAN_EXIT:-0}" -ne 0 ]; then
+        echo "Secrets scan reported findings or an error — check secrets-report.json"
+        exit 1
+      fi
+  artifacts:
+    when: always
+    paths:
+      - secrets-report.json
+    expire_in: 30 days
+
+secret_detection:
+  extends: [.secrets_detect, .rules]
+
+
