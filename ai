@@ -15,3 +15,40 @@ EPAY and PG Department,
 SBI GITC 3RD Floor, Balaji Bhawan,
 CBD Belapur, Navi Mumbai
 Phone: 7987901389
+
+
+Dear Madam,
+
+Please find below the details of the DevOps automation and CI/CD process followed for the application.
+
+We are using **GitLab CI/CD with reusable pipeline templates** for our Java-based microservices. The pipeline is triggered automatically when code is pushed or when a Merge Request is created.
+
+The CI/CD process consists of the following stages:
+
+1. **Versioning** – The pipeline generates the application version based on the branch or Merge Request and passes it to the subsequent stages.
+
+2. **Build** – The application is compiled using Gradle and the JAR artifact is generated.
+
+3. **Test** – Automated unit tests are executed to validate the application functionality.
+
+4. **SAST / Security Scan** – Fortify is used for static application security testing to identify potential security vulnerabilities in the source code.
+
+5. **Container Image Build** – A container image is created automatically using Podman.
+
+6. **Image Push** – After successful build and validation, the container image is pushed to JFrog Artifactory.
+
+7. **Update Tag** – The newly generated image tag is updated in GitLab.
+
+8. **Validate Service** – The microservice configuration and deployment changes are validated before deployment.
+
+9. **Helm Deploy** – The microservice is deployed using the updated Helm chart.
+
+10. **Deployment** – Helm is used to deploy the application to the required environment on OpenShift.
+
+This process helps us keep the build, configuration, installation, and deployment activities consistent and repeatable, while reducing manual intervention and deployment-related errors.
+
+For transaction-level requirements such as end-to-end transaction traceability, file format and mandatory-field validation, file size and transaction-count validation, and MIS/dashboard monitoring for failed or rejected transactions, these are handled at the application/business-function level. The CI/CD pipeline mainly manages the software build, security validation, artifact and image management, and deployment lifecycle.
+
+Regards,
+Anurag
+DevOps Team
